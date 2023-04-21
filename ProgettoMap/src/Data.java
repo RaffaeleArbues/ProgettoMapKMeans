@@ -1,13 +1,13 @@
 
 
-class Data {
+//class Data {
 // Le visibilità di classi , attributi e metodi devono essere decise dagli studenti	
-	Object data [][];
-	int numberOfExamples;
-	Attribute attributeSet[];
+	//Object data [][];
+	//int numberOfExamples;
+	//Attribute attributeSet[];
 	
 	
-	Data(){
+	/*Data(){
 		
 		//data
 		
@@ -225,3 +225,4 @@ class Data {
 	}
 
 }
+*/
