@@ -1,19 +1,16 @@
-
-
 class Data {
-// Le visibilità di classi , attributi e metodi devono essere decise dagli studenti	
-	Object data [][];
+
+	Object [][] data;
 	int numberOfExamples;
-	Attribute attributeSet[];
-	
-	
+	Attribute [] attributeSet;
+
 	Data(){
 		
 		//data
-		
+
 		data = new Object [14][5];
 
-		data[0][0]=new String ("sunny");
+		/* data[0][0]=new String ("sunny");
 		data[1][0]=new String ("sunny");
 		data[2][0]=new String ("sunny");
 		data[3][0]=new String ("rain");
@@ -89,8 +86,9 @@ class Data {
 		data[11][4]=new String ("yes");
 		data[12][4]=new String ("yes");
 		data[13][4]=new String ("yes");
-		
-		/*data[0][0]=new String ("sunny");
+		*/
+
+		data[0][0]=new String ("sunny");
 		data[1][0]=new String ("sunny");
 		data[2][0]=new String ("overcast");
 		data[3][0]=new String ("rain");
@@ -167,61 +165,77 @@ class Data {
 		data[12][4]=new String ("yes");
 		data[13][4]=new String ("no");
 
-		// numberOfExamples
-		
-		 numberOfExamples=14;		 
-		 
-		
-		//explanatory Set
-		
-		attributeSet = new Attribute[5];
+		numberOfExamples = 14;
+
+		attributeSet = new DiscreteAttribute[5];
 
 		// TO DO : avvalorare ciascune elemento di attributeSet con un oggetto della classe DiscreteAttribute che modella il corrispondente attributo (e.g. outlook, temperature,etc)
 		// nel seguito si fornisce l'esempio per outlook
-		
+
 		String outLookValues[]=new String[3];
 		outLookValues[0]="overcast";
 		outLookValues[1]="rain";
 		outLookValues[2]="sunny";
 		attributeSet[0] = new DiscreteAttribute("Outlook",0, outLookValues);
 		
-		// similmente per gli altri attributi
-		
-		
+		String TemperaturesValues[]=new String[3];
+		TemperaturesValues[0]="hot";
+		TemperaturesValues[1]="mild";
+		TemperaturesValues[2]="cool";
+		attributeSet[1] = new DiscreteAttribute("Temperature", 1, TemperaturesValues);
+
+		String HumidityValues[]=new String[2];
+		HumidityValues[0]="high";
+		HumidityValues[1]="normal";
+		attributeSet[2] = new DiscreteAttribute("Humidity", 2, HumidityValues);
+
+		String WindValues[]=new String[2];
+		WindValues[0]="weak";
+		WindValues[1]="strong";
+		attributeSet[3] = new DiscreteAttribute("Wind",3, WindValues);
+
+		String PlayTennisValues[]=new String[2];
+		PlayTennisValues[0]="no";
+		PlayTennisValues[1]="yes";
+		attributeSet[4] = new DiscreteAttribute("PlayTennis",4, PlayTennisValues);
 	}
 	
 	int getNumberOfExamples(){
-		//TO DO
+		return numberOfExamples;
 	}
-	
+
 	int getNumberOfAttributes(){
-		//TO DO
+		return attributeSet.length;
 	}
-	
-	
 	
 	Object getAttributeValue(int exampleIndex, int attributeIndex){
-		//TO DO
+		return data[exampleIndex][attributeIndex];
 	}
 	
 	Attribute getAttribute(int index){
-		//TO DO
+		return attributeSet[index];
 	}
 	
 	
 	public String toString(){
-		//TO DO
-		
-		
+		String table = new String();
+		for (int i = 0; i<attributeSet.length; i++){
+			table = table + attributeSet[i].toString() + ", ";
+		}
+		table = table + "\n";
+		for (int i = 0; i<numberOfExamples; i++){
+			table = table + (i+1) + ": ";
+			for (int j = 0; j<attributeSet.length; j++){
+				table = table + data[i][j].toString() + ",\t";
+			}
+			table = table + "\n";
+		}
+		return table;
 	}
 
-
-	
 	public static void main(String args[]){
 		Data trainingSet=new Data();
 		System.out.println(trainingSet);
-		
-		
 	}
 
 }

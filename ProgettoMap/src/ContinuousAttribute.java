@@ -1,4 +1,5 @@
 class ContinuousAttribute extends Attribute {
+    
     double max;
     double min;
 
