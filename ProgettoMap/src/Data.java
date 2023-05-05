@@ -1,3 +1,4 @@
+import java.util.Random;
 class Data {
 
 	Object [][] data;
@@ -158,8 +159,8 @@ class Data {
 		Tuple tuple = new Tuple(attributeSet.length);
 		for (int i = 0; i<attributeSet.length; i++) {
 			tuple.add(new DiscreteItem(attributeSet[i], (String)data[index][i]), i);
-			return tuple;
 		}
+		return tuple;
 	}
 
 	int [] sampling(int k) {
@@ -174,7 +175,7 @@ class Data {
 				found = false;
 				c = rand.nextInt(numberOfExamples);
 				for (int j = 0; j<i; j++) {
-					if (compare(centroidIndexes[j], c) {
+					if (compare(centroidIndexes[j], c)) {
 						found = true;
 						break;
 					}

@@ -1,8 +1,9 @@
 import java.util.Arrays;
 
+
 public class ArraySet {
 
-	private boolean set[]; //true if the element is in the set
+	protected boolean set[]; //true if the element is in the set
 	private int size = 0;
 
 	ArraySet () {

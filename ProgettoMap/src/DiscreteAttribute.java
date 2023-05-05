@@ -1,3 +1,5 @@
+import java.util.ArrayList;
+
 class DiscreteAttribute extends Attribute {
 
     String[] values;
@@ -21,6 +23,18 @@ class DiscreteAttribute extends Attribute {
     int frequency(Data data, ArraySet idList, String v) {
 
         int count = 0;
+
+        for (int i = 0; i<data.getNumberOfAttributes(); i++) 
+        {
+            for (int j = 0; j<idList.set.length; j++) 
+            {
+                if (idList.get(j)) {
+                    if (data.getAttributeValue(j, i). equals(v)) {
+                        count++;
+                    }
+                }
+            }
+        }
 
         return count; 
     }
