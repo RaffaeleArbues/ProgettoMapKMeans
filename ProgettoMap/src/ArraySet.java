@@ -61,9 +61,9 @@ public class ArraySet {
 				System.arraycopy(a, 0, temp, 0, a.length);
 				a = temp;
 				a[a.length-1] = i;
+
 			}
 		}
 		return a;
 	}
-
 }

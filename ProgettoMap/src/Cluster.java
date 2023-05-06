@@ -1,4 +1,3 @@
-
 public class Cluster {
 	
 	private Tuple centroid;
@@ -25,16 +24,17 @@ public class Cluster {
 		
 	}
 	//return true if the tuple is changing cluster
+  
 	boolean addData(int id) {
 		return clusteredData.add(id);
 	}
 	
 	//verifica se una transazione � clusterizzata nell'array corrente
 	boolean contain(int id) {
+
 		return clusteredData.get(id);
 	}
 	
-
 	//remove the tuple that has changed the cluster
 	void removeTuple(int id) {
 		clusteredData.delete(id);
