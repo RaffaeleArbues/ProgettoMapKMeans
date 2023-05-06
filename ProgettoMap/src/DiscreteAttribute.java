@@ -1,4 +1,3 @@
-import java.util.ArrayList;
 
 class DiscreteAttribute extends Attribute {
 
@@ -24,6 +23,7 @@ class DiscreteAttribute extends Attribute {
 
         int count = 0;
 
+        /* 
         for (int i = 0; i<data.getNumberOfAttributes(); i++) 
         {
             for (int j = 0; j<idList.set.length; j++) 
@@ -35,9 +35,21 @@ class DiscreteAttribute extends Attribute {
                 }
             }
         }
+        */
+
+        for (int j = 0; j<idList.set.length; j++) 
+            {
+                if (idList.get(j)) {
+                    if (data.getAttributeValue(j, getIndex()). equals(v)) {
+                        count++;
+                    }
+                }
+            }
 
         return count; 
     }
+
+
 
 
 }

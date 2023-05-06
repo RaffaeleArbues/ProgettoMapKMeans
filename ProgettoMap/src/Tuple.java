@@ -6,7 +6,7 @@ public class Tuple {
         tuple = new Item[size];
     }
 
-    int getLenght() {
+    int getLength() {
         return tuple.length;
     }
 

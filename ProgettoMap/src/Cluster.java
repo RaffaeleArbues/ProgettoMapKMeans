@@ -16,9 +16,12 @@ public class Cluster {
 		return centroid;
 	}
 	
+	/*
+	 * Aggiorna i centroidi
+	 */
 	void computeCentroid(Data data) {
 	 	
-		for(int i = 0; i<centroid.getLenght(); i++) {
+		for(int i = 0; i<centroid.getLength(); i++) {
 			centroid.get(i).update(data, clusteredData);
 		}
 		
@@ -43,7 +46,7 @@ public class Cluster {
 	public String toString() {
 
 		String str="Centroid=(";
-		for(int i = 0; i<centroid.getLenght(); i++)
+		for(int i = 0; i<centroid.getLength(); i++)
 			str += centroid.get(i);
 		str += ")";
 		return str;
@@ -53,7 +56,7 @@ public class Cluster {
 	public String toString(Data data) {
 
 		String str="Centroid=(";
-		for(int i = 0; i<centroid.getLenght(); i++)
+		for(int i = 0; i<centroid.getLength(); i++)
 			str += centroid.get(i)+ " ";
 		str += ")\nExamples:\n";
 
@@ -61,7 +64,7 @@ public class Cluster {
 		for(int i = 0; i<array.length; i++){
 			str += "[";
 			for(int j = 0; j<data.getNumberOfAttributes(); j++)
-				str += data.getValue(array[i], j)+" ";
+				str += data.getAttributeValue(array[i], j)+" ";
 			str += "] dist="+getCentroid().getDistance(data.getItemSet(array[i]))+"\n";
 			
 		}
