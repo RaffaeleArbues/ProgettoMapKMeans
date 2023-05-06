@@ -23,7 +23,8 @@ public class ClusterSet{
         }
     }
 
-    Cluster nearestCluster(Tuple tuple){
+    Cluster nearestCluster(Tuple tuple) {
+
         Cluster nearest = C[0];
         for(int i = 1; i<C.length; i++){
             if(tuple.getDistance(nearest.getCentroid()) > tuple.getDistance(C[i].getCentroid()))

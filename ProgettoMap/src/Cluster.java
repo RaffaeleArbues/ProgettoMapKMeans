@@ -10,7 +10,7 @@ public class Cluster {
 		this.centroid = centroid;
 		clusteredData = new ArraySet();
 		
-	}
+	} 
 		
 	Tuple getCentroid() {
 		return centroid;
@@ -27,7 +27,6 @@ public class Cluster {
 		
 	}
 	//return true if the tuple is changing cluster
-  
 	boolean addData(int id) {
 		return clusteredData.add(id);
 	}
