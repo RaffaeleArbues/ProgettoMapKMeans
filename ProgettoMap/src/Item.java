@@ -23,6 +23,9 @@ abstract class Item {
 
     abstract double distance(Object a); // implementazione diversa per ogni tipo di attributo
 
+    /*
+     * Modifica value di Item con il valore più ripetuto per un determinato attributo
+     */
     void update (Data data, ArraySet clusteredData) {
         this.value = data.computePrototype(clusteredData, attribute);
     }

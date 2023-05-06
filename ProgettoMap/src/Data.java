@@ -1,4 +1,6 @@
 import java.util.Random;
+import java.util.Arrays;
+
 class Data {
 
 	Object [][] data;
@@ -158,7 +160,7 @@ class Data {
 
 		Tuple tuple = new Tuple(attributeSet.length);
 		for (int i = 0; i<attributeSet.length; i++) {
-			tuple.add(new DiscreteItem(attributeSet[i], (String)data[index][i]), i);
+			tuple.add(new DiscreteItem((DiscreteAttribute)attributeSet[i], (String)data[index][i]), i);
 		}
 		return tuple;
 	}
@@ -173,10 +175,10 @@ class Data {
 			int c;
 			do {
 				found = false;
-				c = rand.nextInt(numberOfExamples);
+				c = rand.nextInt(numberOfExamples); // numero casuale tra 0 e numberOfExamples-1
 				for (int j = 0; j<i; j++) {
-					if (compare(centroidIndexes[j], c)) {
-						found = true;
+					if (compare(centroidIndexes[j], c)) { // se c è già stato scelto come centroide
+						found = true;					  // esci dal ciclo e scegli un altro centroide
 						break;
 					}
 				}
@@ -200,11 +202,29 @@ class Data {
 	}
 
 	Object computePrototype(ArraySet idList, Attribute attribute) {
-		//...
+		return (Object) computePrototype(idList, (DiscreteAttribute) attribute);
 	}
 
+	/*
+	 * valore che più frequentemente si ripete per attribute utilizzando idList
+	 */
 	String computeProtoype(ArraySet idList, DiscreteAttribute attribute) {
-		//...
+		
+		int max[] = new int[attribute.getNumberOfDistinctValues()];
+		Arrays.fill(max, 0);
+
+		for (int i = 0; i<getNumberOfExamples(); i++) {
+			max[i] = attribute.frequency(this, idList, attribute.getValue(i));
+		}
+
+		int massimo = max[0];
+		for (int i = 1; i<max.length; i++) {
+			if (massimo < max[i]) {
+				massimo = max [i];
+			}
+		}
+
+		return attribute.getValue(massimo);
 	}
 
 	public static void main(String args[]) {
