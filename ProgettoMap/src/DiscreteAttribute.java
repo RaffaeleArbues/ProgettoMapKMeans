@@ -1,7 +1,7 @@
 
 class DiscreteAttribute extends Attribute {
 
-    String[] values;
+    private String[] values;
 
     DiscreteAttribute(String name, int index, String[] values) {
         super(name, index);
@@ -11,32 +11,17 @@ class DiscreteAttribute extends Attribute {
         }
     }
 
-    int getNumberOfDistinctValues() {
+    public int getNumberOfDistinctValues() {
         return values.length;
     }
 
-    String getValue(int i) {
+    public String getValue(int i) {
         return values[i];
     }
 
-    int frequency(Data data, ArraySet idList, String v) {
+    public int frequency(Data data, ArraySet idList, String v) {
 
         int count = 0;
-
-        /* 
-        for (int i = 0; i<data.getNumberOfAttributes(); i++) 
-        {
-            for (int j = 0; j<idList.set.length; j++) 
-            {
-                if (idList.get(j)) {
-                    if (data.getAttributeValue(j, i). equals(v)) {
-                        count++;
-                    }
-                }
-            }
-        }
-        */
-
         for (int j = 0; j<idList.set.length; j++) 
             {
                 if (idList.get(j)) {

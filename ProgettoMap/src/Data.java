@@ -3,9 +3,9 @@ import java.util.Arrays;
 
 class Data {
 
-	Object [][] data;
-	int numberOfExamples;
-	Attribute [] attributeSet;
+	private Object [][] data;
+	private int numberOfExamples;
+	private Attribute [] attributeSet;
 
 	Data() {
 		//data
@@ -156,7 +156,7 @@ class Data {
 		return table;
 	}
 
-	Tuple getItemSet(int index) {
+	public Tuple getItemSet(int index) {
 
 		Tuple tuple = new Tuple(attributeSet.length);
 		for (int i = 0; i<attributeSet.length; i++) {
@@ -165,7 +165,7 @@ class Data {
 		return tuple;
 	}
 
-	int [] sampling(int k) {
+	public int [] sampling(int k) {
 
 		int centroidIndexes[] = new int[k];
 		Random rand = new Random();
@@ -201,14 +201,14 @@ class Data {
 
 	}
  
-	Object computePrototype(ArraySet idList, Attribute attribute) {
+	public Object computePrototype(ArraySet idList, Attribute attribute) {
 		return  computePrototype(idList, (DiscreteAttribute)attribute);
 	}
 
 	/*
 	 * valore che più frequentemente si ripete per attribute utilizzando idList
 	 */
-	String computePrototype(ArraySet idList, DiscreteAttribute attribute) {
+	public String computePrototype(ArraySet idList, DiscreteAttribute attribute) {
 		
 		int freq[] = new int[attribute.getNumberOfDistinctValues()];
 		Arrays.fill(freq, 0);
@@ -228,9 +228,5 @@ class Data {
 		return attribute.getValue(maxIndex);
 	}
 
-	public static void main(String args[]) {
-		Data trainingSet=new Data();
-		System.out.println(trainingSet);
-	}
 
 }

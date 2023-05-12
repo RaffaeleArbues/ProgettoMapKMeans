@@ -1,4 +1,4 @@
-public class Cluster {
+class Cluster {
 	
 	private Tuple centroid;
 	private ArraySet clusteredData; 
@@ -12,14 +12,14 @@ public class Cluster {
 		
 	} 
 		
-	Tuple getCentroid() {
+	public Tuple getCentroid() {
 		return centroid;
 	}
 	
 	/*
 	 * Aggiorna i centroidi
 	 */
-	void computeCentroid(Data data) {
+	public void computeCentroid(Data data) {
 	 	
 		for(int i = 0; i<centroid.getLength(); i++) {
 			centroid.get(i).update(data, clusteredData);
@@ -27,18 +27,18 @@ public class Cluster {
 		
 	}
 	//return true if the tuple is changing cluster
-	boolean addData(int id) {
+	public boolean addData(int id) {
 		return clusteredData.add(id);
 	}
 	
 	//verifica se una transazione � clusterizzata nell'array corrente
-	boolean contain(int id) {
+	public boolean contain(int id) {
 
 		return clusteredData.get(id);
 	}
 	
 	//remove the tuple that has changed the cluster
-	void removeTuple(int id) {
+	public void removeTuple(int id) {
 		clusteredData.delete(id);
 	}
 	
@@ -49,7 +49,6 @@ public class Cluster {
 			str += centroid.get(i);
 		str += ")";
 		return str;
-
 	}
 	
 	public String toString(Data data) {

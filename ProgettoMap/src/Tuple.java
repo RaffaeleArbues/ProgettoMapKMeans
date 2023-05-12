@@ -1,24 +1,24 @@
-public class Tuple {
+class Tuple {
     
-    Item[] tuple;
+    private Item[] tuple;
 
     Tuple(int size) {
         tuple = new Item[size];
     }
 
-    int getLength() {
+    public int getLength() {
         return tuple.length;
     }
 
-    Item get(int i) {
+    public Item get(int i) {
         return tuple[i];
     }
 
-    void add(Item c, int i) {
+    public void add(Item c, int i) {
         tuple[i] = c;
     }
 
-    double getDistance(Tuple obj) {
+    public double getDistance(Tuple obj) { 
 
         double distance = 0.0;
         for (int i = 0; i<this.tuple.length; i++) {
@@ -28,12 +28,14 @@ public class Tuple {
         return distance;
     }
 
-    double avgDistance(Data data, int clusteredData[]) {
-
-        double avg, sum = 0.0;
-        
-        avg = sum / clusteredData.length;
-        return avg;
+    double avgDistance(Data data, int clusteredData[]){
+        double p = 0.0 , sumD = 0.0;
+        for(int i=0;i<clusteredData.length;i++){
+            double d = getDistance(data.getItemSet(clusteredData[i]));
+            sumD+=d;
+        }
+        p=sumD/clusteredData.length;
+        return p;
     }
 
 

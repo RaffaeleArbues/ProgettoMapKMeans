@@ -1,8 +1,8 @@
 
 abstract class Item {
 
-    Attribute attribute;
-    Object value;
+    private Attribute attribute;
+    private Object value;
 
     Item(Attribute attribute, Object value) {
         this.attribute = attribute;
@@ -26,7 +26,7 @@ abstract class Item {
     /*
      * Modifica value di Item con il valore più ripetuto per un determinato attributo
      */
-    void update (Data data, ArraySet clusteredData) {
+    public void update (Data data, ArraySet clusteredData) {
         this.value = data.computePrototype(clusteredData, attribute);
     }
 }

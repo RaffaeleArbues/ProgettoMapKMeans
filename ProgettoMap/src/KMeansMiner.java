@@ -1,5 +1,5 @@
-public class KMeansMiner {
-    ClusterSet C;
+class KMeansMiner {
+    private ClusterSet C;
 
     KMeansMiner(int k) {
 
@@ -7,11 +7,11 @@ public class KMeansMiner {
 
     }
 
-    ClusterSet getC() {
+    public ClusterSet getC() {
         return C;
     }
 
-    int kmeans(Data data) {
+    public int kmeans(Data data) {
 
         int numberOfIterations=0;
         //STEP 1

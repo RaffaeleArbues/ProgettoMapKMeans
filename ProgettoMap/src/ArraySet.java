@@ -1,25 +1,26 @@
 import java.util.Arrays;
 
 
-public class ArraySet {
+class ArraySet {
 
 	protected boolean set[]; //true if the element is in the set
-	private int size = 0;
+	private int size;
 
 	ArraySet () {
-		set = new boolean[50];
-		for(int i = 0; i<set.length; i++)
+		size = 50;
+		set = new boolean[size];
+		for(int i = 0; i<size; i++)
 			set[i] = false;
 	}
 	
 	//return true if add is changing the arraySet
-	boolean add(int i) {
+	public boolean add(int i) {
 
-		if(i>=set.length) {
+		if(i>=size) {
 			//enlarge the set
-			boolean temp[] = new boolean[set.length*2];
+			boolean temp[] = new boolean[size*2];
 			Arrays.fill(temp, false); //set all the elements to false
-			System.arraycopy(set, 0, temp, 0, set.length); //copy the old set
+			System.arraycopy(set, 0, temp, 0, size); //copy the old set
 			set = temp;
 		}	
 
@@ -31,7 +32,7 @@ public class ArraySet {
 		return !added; 
 	}
 	
-	boolean delete(int i) {
+	public boolean delete(int i) {
 
 		if(i<size) {
 			boolean deleted = set[i];
@@ -48,11 +49,11 @@ public class ArraySet {
 		return false;
 	}
 	
-	boolean get(int i) {
+	public boolean get(int i) {
 		return set[i];
 	}
 	
-	int[] toArray() { 
+	public int[] toArray() { 
 
 		int a[] = new int[0];
 		for(int i = 0; i<size; i++) {
