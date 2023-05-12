@@ -1,12 +1,12 @@
 public class ClusterSet{
     Cluster[] C;
-    int i = 0;
+    // int i = 0;
 
     ClusterSet(int k){
         C = new Cluster[k];
     }
 
-    void add(Cluster clust){
+    void add(Cluster clust, int i){
         C[i] = clust; 
     }
 
@@ -19,7 +19,7 @@ public class ClusterSet{
         int[] centroidIndexes = data.sampling(C.length);
         for(int i = 0; i<centroidIndexes.length; i++){
             Tuple centroidI = data.getItemSet(centroidIndexes[i]);
-            add(new Cluster(centroidI));
+            add(new Cluster(centroidI), i);
         }
     }
 

@@ -200,31 +200,32 @@ class Data {
 		return res;
 
 	}
-
+ 
 	Object computePrototype(ArraySet idList, Attribute attribute) {
-		return (Object) computePrototype(idList, (DiscreteAttribute) attribute);
+		return  computePrototype(idList, (DiscreteAttribute)attribute);
 	}
 
 	/*
 	 * valore che più frequentemente si ripete per attribute utilizzando idList
 	 */
-	String computeProtoype(ArraySet idList, DiscreteAttribute attribute) {
+	String computePrototype(ArraySet idList, DiscreteAttribute attribute) {
 		
-		int max[] = new int[attribute.getNumberOfDistinctValues()];
-		Arrays.fill(max, 0);
+		int freq[] = new int[attribute.getNumberOfDistinctValues()];
+		Arrays.fill(freq, 0);
 
-		for (int i = 0; i<getNumberOfExamples(); i++) {
-			max[i] = attribute.frequency(this, idList, attribute.getValue(i));
+		for (int i = 0; i<attribute.getNumberOfDistinctValues(); i++) {
+			freq[i] = attribute.frequency(this, idList, attribute.getValue(i));
 		}
 
-		int massimo = max[0];
-		for (int i = 1; i<max.length; i++) {
-			if (massimo < max[i]) {
-				massimo = max [i];
+		int max = freq[0];
+		int maxIndex = 0;
+		for (int i = 1; i<freq.length; i++) {
+			if (max < freq[i]) {
+				maxIndex = i;
 			}
 		}
 
-		return attribute.getValue(massimo);
+		return attribute.getValue(maxIndex);
 	}
 
 	public static void main(String args[]) {
