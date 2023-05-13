@@ -1,12 +1,13 @@
+package utility;
 import java.util.Arrays;
 
 
-class ArraySet {
+public class ArraySet {
 
-	protected boolean set[]; //true if the element is in the set
+	private boolean set[]; //true if the element is in the set
 	private int size;
 
-	ArraySet () {
+	public ArraySet () {
 		size = 50;
 		set = new boolean[size];
 		for(int i = 0; i<size; i++)
@@ -56,6 +57,9 @@ class ArraySet {
 	
 	public boolean get(int i) {
 		return set[i];
+	}
+	public int getSize() {
+		return size;
 	}
 	
 	/*

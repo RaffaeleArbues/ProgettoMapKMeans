@@ -1,4 +1,6 @@
-class Tuple {
+package data;
+
+public class Tuple {
     
     private Item[] tuple;
 
@@ -28,7 +30,7 @@ class Tuple {
         return distance;
     }
 
-    double avgDistance(Data data, int clusteredData[]){
+    public double avgDistance(Data data, int clusteredData[]){
         double p = 0.0 , sumD = 0.0;
         for(int i=0;i<clusteredData.length;i++){
             double d = getDistance(data.getItemSet(clusteredData[i]));

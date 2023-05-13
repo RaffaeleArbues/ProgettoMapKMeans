@@ -1,5 +1,7 @@
+package data;
+import utility.ArraySet;
 
-abstract class Item {
+public abstract class Item {
 
     private Attribute attribute;
     private Object value;
@@ -9,11 +11,11 @@ abstract class Item {
         this.value = value;
     }
 
-    Attribute getAttribute() {
+    public Attribute getAttribute() {
         return attribute;
     }
 
-    Object getValue() {
+    public Object getValue() {
         return value;
     }
 

@@ -1,4 +1,9 @@
-class ClusterSet{
+package mining;
+import data.Data;
+import data.Tuple;
+import data.OutOfRangeSampleSize;
+
+public class ClusterSet{
 
     private Cluster[] C;
 
@@ -15,7 +20,7 @@ class ClusterSet{
     }
 
     // Inserisce gli indici dei centroidi dentro l'array centroidIndexes e crea i cluster in base a quello.
-    public void inizializeCentroids(Data data){
+    public void inizializeCentroids(Data data) throws OutOfRangeSampleSize{
         int[] centroidIndexes = data.sampling(C.length);
         for(int i = 0; i<centroidIndexes.length; i++){
             Tuple centroidI = data.getItemSet(centroidIndexes[i]);

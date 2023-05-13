@@ -1,13 +1,16 @@
+package data;
 import java.util.Random;
 import java.util.Arrays;
+import utility.ArraySet;
 
-class Data {
+public class Data {
 
 	private Object [][] data;
 	private int numberOfExamples;
 	private Attribute [] attributeSet;
+	private int distinctTuples;
 
-	Data() {
+	public Data() {
 		//data
 		data = new Object [14][5];
 
@@ -121,21 +124,23 @@ class Data {
 		PlayTennisValues[0]="no";
 		PlayTennisValues[1]="yes";
 		attributeSet[4] = new DiscreteAttribute("PlayTennis",4, PlayTennisValues);
+
+		distinctTuples = countDistinctTuples();
 	}
 	
-	int getNumberOfExamples() {
+	public int getNumberOfExamples() {
 		return numberOfExamples;
 	}
 
-	int getNumberOfAttributes() {
+	public int getNumberOfAttributes() {
 		return attributeSet.length;
 	}
 	
-	Object getAttributeValue(int exampleIndex, int attributeIndex) {
+	public Object getAttributeValue(int exampleIndex, int attributeIndex) {
 		return data[exampleIndex][attributeIndex];
 	}
 	
-	Attribute getAttribute(int index) {
+	public Attribute getAttribute(int index) {
 		return attributeSet[index];
 	}
 	
@@ -165,8 +170,10 @@ class Data {
 		return tuple;
 	}
 
-	public int [] sampling(int k) {
-
+	public int [] sampling(int k) throws OutOfRangeSampleSize{
+		if (k<0 || k>distinctTuples) {
+			throw new OutOfRangeSampleSize("Il numero di elementi del campione deve essere compreso tra 0 e " + distinctTuples + "");
+		}
 		int centroidIndexes[] = new int[k];
 		Random rand = new Random();
 		rand.setSeed(System.currentTimeMillis());
@@ -226,6 +233,21 @@ class Data {
 		}
 
 		return attribute.getValue(maxIndex);
+	}
+
+	private int countDistinctTuples(){
+		int count = 0;
+		for(int i=0; i<this.getNumberOfAttributes(); i++){
+			for(int j=0; j<this.getNumberOfExamples(); j++){
+				if(this.compare(i, j)){
+					break;
+				}
+				else{
+					count++;
+				}
+			}
+		}
+		return count;
 	}
 
 }

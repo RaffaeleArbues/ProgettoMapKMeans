@@ -1,3 +1,5 @@
+package data;
+import utility.ArraySet;
 
 class DiscreteAttribute extends Attribute {
 
@@ -26,7 +28,7 @@ class DiscreteAttribute extends Attribute {
     public int frequency(Data data, ArraySet idList, String v) {
 
         int count = 0;
-        for (int j = 0; j<idList.set.length; j++) 
+        for (int j = 0; j<idList.getSize(); j++) 
             {
                 if (idList.get(j)) {
                     if (data.getAttributeValue(j, getIndex()).equals(v)) {

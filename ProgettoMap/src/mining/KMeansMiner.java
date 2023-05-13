@@ -1,8 +1,12 @@
-class KMeansMiner {
+package mining;
+import data.Data;
+import data.OutOfRangeSampleSize;
+
+public class KMeansMiner {
 
     private ClusterSet C;
 
-    KMeansMiner(int k) {
+    public KMeansMiner(int k) {
 
         C = new ClusterSet(k);
 
@@ -12,7 +16,7 @@ class KMeansMiner {
         return C;
     }
 
-    public int kmeans(Data data) {
+    public int kmeans(Data data) throws OutOfRangeSampleSize{
 
         int numberOfIterations = 0;
         //STEP 1
