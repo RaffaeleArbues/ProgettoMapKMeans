@@ -19,13 +19,17 @@ class DiscreteAttribute extends Attribute {
         return values[i];
     }
 
+    /*
+     * restituisve quante volte si ripete un valore attributo (string v)
+     */
+
     public int frequency(Data data, ArraySet idList, String v) {
 
         int count = 0;
         for (int j = 0; j<idList.set.length; j++) 
             {
                 if (idList.get(j)) {
-                    if (data.getAttributeValue(j, getIndex()). equals(v)) {
+                    if (data.getAttributeValue(j, getIndex()).equals(v)) {
                         count++;
                     }
                 }

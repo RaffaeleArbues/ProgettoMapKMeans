@@ -30,6 +30,10 @@ class ArraySet {
 			size = i+1; 
 
 		return !added; 
+		/*
+		 * inizialmente set[] sono tutti false quindi se dopo la riga28 set[i] diventa true, allora restituisce true (add a buon fine),
+		 * se set[i] è gia true, allora la riga28 non cambia lo stato di set, quindi restituisce false
+		 */
 	}
 	
 	public boolean delete(int i) {
@@ -46,6 +50,7 @@ class ArraySet {
 			}
 			return deleted;
 		}
+
 		return false;
 	}
 	
@@ -53,16 +58,20 @@ class ArraySet {
 		return set[i];
 	}
 	
+	/*
+	 * dove arraySet è true allora int a[i] = i
+	 */
 	public int[] toArray() { 
 
 		int a[] = new int[0];
-		for(int i = 0; i<size; i++) {
-			if(get(i)) {
+		for(int i = 0; i<size; i++) 
+		{
+			if(get(i)) 
+			{
 				int temp[] = new int[a.length+1];
 				System.arraycopy(a, 0, temp, 0, a.length);
-				a = temp;
+				a = temp; 
 				a[a.length-1] = i;
-
 			}
 		}
 		return a;

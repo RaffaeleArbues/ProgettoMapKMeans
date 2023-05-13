@@ -1,4 +1,5 @@
 class KMeansMiner {
+
     private ClusterSet C;
 
     KMeansMiner(int k) {
@@ -13,7 +14,7 @@ class KMeansMiner {
 
     public int kmeans(Data data) {
 
-        int numberOfIterations=0;
+        int numberOfIterations = 0;
         //STEP 1
         C.inizializeCentroids(data);
         boolean changedCluster=false;
@@ -22,8 +23,9 @@ class KMeansMiner {
         //STEP 2
         changedCluster=false;
         for(int i=0; i<data.getNumberOfExamples(); i++) {
-            Cluster nearestCluster = C.nearestCluster(data.getItemSet(i));
-            Cluster oldCluster=C.currentCluster(i);
+            // stabilisco il claster più vicino passando ogni tupla di data ad ogni iterata
+            Cluster nearestCluster = C.nearestCluster(data.getItemSet(i)); 
+            Cluster oldCluster = C.currentCluster(i); //cluster che contiene la tupa id = 0
             boolean currentChange = nearestCluster.addData(i);
             if(currentChange)
                 changedCluster=true;

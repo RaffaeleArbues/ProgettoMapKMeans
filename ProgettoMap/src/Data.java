@@ -206,11 +206,11 @@ class Data {
 	}
 
 	/*
-	 * valore che più frequentemente si ripete per attribute utilizzando idList
+	 * valore(attributo) che più frequentemente si ripete utilizzando un vettore freq e la funzione frequency
 	 */
 	public String computePrototype(ArraySet idList, DiscreteAttribute attribute) {
 		
-		int freq[] = new int[attribute.getNumberOfDistinctValues()];
+		int freq[] = new int[attribute.getNumberOfDistinctValues()]; // freq di dimensione 5 nel nostro caso
 		Arrays.fill(freq, 0);
 
 		for (int i = 0; i<attribute.getNumberOfDistinctValues(); i++) {
@@ -220,13 +220,12 @@ class Data {
 		int max = freq[0];
 		int maxIndex = 0;
 		for (int i = 1; i<freq.length; i++) {
-			if (max < freq[i]) {
+			if (max < freq[i]) { // e se abbiamo due indici con valori uguali?
 				maxIndex = i;
 			}
 		}
 
 		return attribute.getValue(maxIndex);
 	}
-
 
 }

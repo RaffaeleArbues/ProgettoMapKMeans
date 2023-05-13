@@ -1,4 +1,5 @@
 class ClusterSet{
+
     private Cluster[] C;
 
     ClusterSet(int k){
@@ -32,11 +33,16 @@ class ClusterSet{
         return nearest;
     }
 
+    /*
+     * restituisce il cluster dove è presenta la tupla id
+     */
     public Cluster currentCluster(int id){
+
         for(int i = 0; i<C.length; i++){
             if(C[i].contain(id))
                 return C[i];
         }
+
         return null;
     }
 
@@ -47,6 +53,7 @@ class ClusterSet{
     }
 
     public String toString(){
+
         String str = "";
         for(int i = 0; i<C.length; i++){
             if(C[i] != null){
@@ -54,15 +61,19 @@ class ClusterSet{
             }
         }
         return str;
+
     }
 
     public String toString(Data data){
+
         String str = "";
         for(int i = 0; i<C.length; i++){
-            if(C[i] != null){
-                str += "Cluster "+i+": "+C[i].toString(data)+"\n";
+            if(C[i] != null) {
+                str += "\nCluster "+i+": "+C[i].toString(data)+"\n";
             }
         }
+
         return str;
     }
+
 }

@@ -6,8 +6,9 @@ public class MainTest {
 
 		int k = 3;
 		KMeansMiner kmeans = new KMeansMiner(k);
+
 		int numIter = kmeans.kmeans(data);
-		System.out.println("Numero di Iterazione:"+numIter);
+		System.out.println("Numero di Iterazioni eseguite: "+numIter);
 		System.out.println(kmeans.getC().toString(data));
 
 	}
