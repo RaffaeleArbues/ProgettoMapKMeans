@@ -1,131 +1,130 @@
 package data;
 import java.util.Random;
+import java.util.TreeSet;
 import java.util.Arrays;
+import java.util.List;
+import java.util.ArrayList;
+import java.util.LinkedList;
+
 import utility.ArraySet;
 
 public class Data {
 
-	private Object [][] data;
+	private List<Example> data = new ArrayList<Example>();
 	private int numberOfExamples;
-	private Attribute [] attributeSet;
-	private int distinctTuples;
+	private List<Attribute> attributeSet = new LinkedList<Attribute>();
 
 	public Data() {
 		//data
-		data = new Object [14][5];
+		TreeSet<Example> tempData = new TreeSet<Example>();
+		Example ex0 = new Example();
+		Example ex1 = new Example();
+		Example ex2 = new Example();
+		Example ex3 = new Example();
+		Example ex4 = new Example();
+		Example ex5 = new Example();
+		Example ex6 = new Example();
+		Example ex7 = new Example();
+		Example ex8 = new Example();
+		Example ex9 = new Example();
+		Example ex10 = new Example();
+		Example ex11 = new Example();
+		Example ex12 = new Example();
+		Example ex13 = new Example();
 
-		data[0][0]=new String ("sunny");
-		data[1][0]=new String ("sunny");
-		data[2][0]=new String ("overcast");
-		data[3][0]=new String ("rain");
-		data[4][0]=new String ("rain");
-		data[5][0]=new String ("rain");
-		data[6][0]=new String ("overcast");
-		data[7][0]=new String ("sunny");
-		data[8][0]=new String ("sunny");
-		data[9][0]=new String ("rain");
-		data[10][0]=new String ("sunny");
-		data[11][0]=new String ("overcast");
-		data[12][0]=new String ("overcast");
-		data[13][0]=new String ("rain");
-		
-		data[0][1]=new String ("hot");
-		data[1][1]=new String ("hot");
-		data[2][1]=new String ("hot");
-		data[3][1]=new String ("mild");
-		data[4][1]=new String ("cool");
-		data[5][1]=new String ("cool");
-		data[6][1]=new String ("cool");
-		data[7][1]=new String ("mild");
-		data[8][1]=new String ("cool");
-		data[9][1]=new String ("mild");
-		data[10][1]=new String ("mild");
-		data[11][1]=new String ("mild");
-		data[12][1]=new String ("hot");
-		data[13][1]=new String ("mild");
-		
-		data[0][2]=new String ("high");
-		data[1][2]=new String ("high");
-		data[2][2]=new String ("high");
-		data[3][2]=new String ("high");
-		data[4][2]=new String ("normal");
-		data[5][2]=new String ("normal");
-		data[6][2]=new String ("normal");
-		data[7][2]=new String ("high");
-		data[8][2]=new String ("normal");
-		data[9][2]=new String ("normal");
-		data[10][2]=new String ("normal");
-		data[11][2]=new String ("high");
-		data[12][2]=new String ("normal");
-		data[13][2]=new String ("high");
-		
-		
-		data[0][3]=new String ("weak");
-		data[1][3]=new String ("strong");
-		data[2][3]=new String ("weak");
-		data[3][3]=new String ("weak");
-		data[4][3]=new String ("weak");
-		data[5][3]=new String ("strong");
-		data[6][3]=new String ("strong");
-		data[7][3]=new String ("weak");
-		data[8][3]=new String ("weak");
-		data[9][3]=new String ("weak");
-		data[10][3]=new String ("strong");
-		data[11][3]=new String ("strong");
-		data[12][3]=new String ("weak");
-		data[13][3]=new String ("strong");
-		
+		ex0.add(new String ("sunny"));
+		ex1.add(new String ("sunny"));
+		ex2.add(new String ("overcast"));
+		ex3.add(new String ("rain"));
+		ex4.add(new String ("rain"));
+		ex5.add(new String ("rain"));
+		ex6.add(new String ("overcast"));
+		ex7.add(new String ("sunny"));
+		ex8.add(new String ("sunny"));
+		ex9.add(new String ("rain"));
+		ex10.add(new String ("sunny"));
+		ex11.add(new String ("overcast"));
+		ex12.add(new String ("overcast"));
+		ex13.add(new String ("rain"));
 
-		data[0][4]=new String ("no");
-		data[1][4]=new String ("no");
-		data[2][4]=new String ("yes");
-		data[3][4]=new String ("yes");
-		data[4][4]=new String ("yes");
-		data[5][4]=new String ("no");
-		data[6][4]=new String ("yes");
-		data[7][4]=new String ("no");
-		data[8][4]=new String ("yes");
-		data[9][4]=new String ("yes");
-		data[10][4]=new String ("yes");
-		data[11][4]=new String ("yes");
-		data[12][4]=new String ("yes");
-		data[13][4]=new String ("no");
+		ex0.add(new String ("hot"));
+		ex1.add(new String ("hot"));
+		ex2.add(new String ("hot"));
+		ex3.add(new String ("mild"));
+		ex4.add(new String ("cool"));
+		ex5.add(new String ("cool"));
+		ex6.add(new String ("cool"));
+		ex7.add(new String ("mild"));
+		ex8.add(new String ("cool"));
+		ex9.add(new String ("mild"));
+		ex10.add(new String ("mild"));
+		ex11.add(new String ("mild"));
+		ex12.add(new String ("hot"));
+		ex13.add(new String ("mild"));
+
+		ex0.add(new String ("high"));
+		ex1.add(new String ("high"));
+		ex2.add(new String ("high"));
+		ex3.add(new String ("high"));
+		ex4.add(new String ("normal"));
+		ex5.add(new String ("normal"));
+		ex6.add(new String ("normal"));
+		ex7.add(new String ("high"));
+		ex8.add(new String ("normal"));
+		ex9.add(new String ("normal"));
+		ex10.add(new String ("normal"));
+		ex11.add(new String ("high"));
+		ex12.add(new String ("normal"));
+		ex13.add(new String ("high"));
+
+		ex0.add(new String ("weak"));
+		ex1.add(new String ("strong"));
+		ex2.add(new String ("weak"));
+		ex3.add(new String ("weak"));
+		ex4.add(new String ("weak"));
+		ex5.add(new String ("strong"));
+		ex6.add(new String ("strong"));
+		ex7.add(new String ("weak"));
+		ex8.add(new String ("weak"));
+		ex9.add(new String ("weak"));
+		ex10.add(new String ("strong"));
+		ex11.add(new String ("strong"));
+		ex12.add(new String ("weak"));
+		ex13.add(new String ("strong"));
+
+		ex0.add(new String ("no"));
+		ex1.add(new String ("no"));
+		ex2.add(new String ("yes"));
+		ex3.add(new String ("yes"));
+		ex4.add(new String ("yes"));
+		ex5.add(new String ("no"));
+		ex6.add(new String ("yes"));
+		ex7.add(new String ("no"));
+		ex8.add(new String ("yes"));
+		ex9.add(new String ("yes"));
+		ex10.add(new String ("yes"));
+		ex11.add(new String ("yes"));
+		ex12.add(new String ("yes"));
+		ex13.add(new String ("no"));
 
 		numberOfExamples = 14;
 
-		attributeSet = new DiscreteAttribute[5];
+		tempData.add(ex0);
+		tempData.add(ex1);
+		tempData.add(ex2);
+		tempData.add(ex3);
+		tempData.add(ex4);
+		tempData.add(ex5);
+		tempData.add(ex6);
+		tempData.add(ex7);
+		tempData.add(ex8);
+		tempData.add(ex9);
+		tempData.add(ex10);
+		tempData.add(ex11);
+		tempData.add(ex12);
+		tempData.add(ex13);
 
-		// TO DO : avvalorare ciascune elemento di attributeSet con un oggetto della classe DiscreteAttribute che modella il corrispondente attributo (e.g. outlook, temperature,etc)
-		// nel seguito si fornisce l'esempio per outlook
-
-		String outLookValues[]=new String[3];
-		outLookValues[0]="overcast";
-		outLookValues[1]="rain";
-		outLookValues[2]="sunny";
-		attributeSet[0] = new DiscreteAttribute("Outlook",0, outLookValues);
-		
-		String TemperaturesValues[]=new String[3];
-		TemperaturesValues[0]="hot";
-		TemperaturesValues[1]="mild";
-		TemperaturesValues[2]="cool";
-		attributeSet[1] = new DiscreteAttribute("Temperature", 1, TemperaturesValues);
-
-		String HumidityValues[]=new String[2];
-		HumidityValues[0]="high";
-		HumidityValues[1]="normal";
-		attributeSet[2] = new DiscreteAttribute("Humidity", 2, HumidityValues);
-
-		String WindValues[]=new String[2];
-		WindValues[0]="weak";
-		WindValues[1]="strong";
-		attributeSet[3] = new DiscreteAttribute("Wind",3, WindValues);
-
-		String PlayTennisValues[]=new String[2];
-		PlayTennisValues[0]="no";
-		PlayTennisValues[1]="yes";
-		attributeSet[4] = new DiscreteAttribute("PlayTennis",4, PlayTennisValues);
-
-		distinctTuples = countDistinctTuples();
+		data = new ArrayList<Example>(tempData);
 	}
 	
 	public int getNumberOfExamples() {
@@ -235,19 +234,14 @@ public class Data {
 		return attribute.getValue(maxIndex);
 	}
 
-	private int countDistinctTuples(){
-		int count = 0;
-		for(int i=0; i<this.getNumberOfAttributes(); i++){
-			for(int j=0; j<this.getNumberOfExamples(); j++){
-				if(this.compare(i, j)){
-					break;
-				}
-				else{
-					count++;
-				}
-			}
-		}
-		return count;
+	class Example implements Comparable<Example>{
+		private List<Object> example = new ArrayList<Object>();
+
+		public void add(Object o){}
+		public Object get(int i){return null;}
+		public int compareTo(Example ex){return 0;}
+		public String toString(){return null;}
+
 	}
 
 }
