@@ -15,8 +15,9 @@ public class Data {
 	private List<Attribute> attributeSet = new LinkedList<Attribute>();
 
 	public Data() {
-		//data
+		// TreeSet di suppporto
 		TreeSet<Example> tempData = new TreeSet<Example>();
+		// creiamo le 14 liste (14 righe di data)
 		Example ex0 = new Example();
 		Example ex1 = new Example();
 		Example ex2 = new Example();
@@ -32,6 +33,7 @@ public class Data {
 		Example ex12 = new Example();
 		Example ex13 = new Example();
 
+		// prima colonna 
 		ex0.add(new String ("sunny"));
 		ex1.add(new String ("sunny"));
 		ex2.add(new String ("overcast"));
@@ -47,6 +49,7 @@ public class Data {
 		ex12.add(new String ("overcast"));
 		ex13.add(new String ("rain"));
 
+		// seconda colonna 
 		ex0.add(new String ("hot"));
 		ex1.add(new String ("hot"));
 		ex2.add(new String ("hot"));
@@ -92,6 +95,7 @@ public class Data {
 		ex12.add(new String ("weak"));
 		ex13.add(new String ("strong"));
 
+		// quinta colonna, abbiamo le liste complete (la matrice completa)
 		ex0.add(new String ("no"));
 		ex1.add(new String ("no"));
 		ex2.add(new String ("yes"));
@@ -125,6 +129,44 @@ public class Data {
 		tempData.add(ex13);
 
 		data = new ArrayList<Example>(tempData);
+
+		// attributeSet ora è una lista e va inizializzata come tale 
+		TreeSet<String> outlookvls = new TreeSet<String>();
+		outlookvls.add("overcast");
+		outlookvls.add("rain");
+		outlookvls.add("sunny");
+		DiscreteAttribute OutlookValues = new DiscreteAttribute("OutlookkValues", 0, outlookvls);
+
+		TreeSet<String> temperaturesvls = new TreeSet<String>();
+		temperaturesvls.add("hot");
+		temperaturesvls.add("mild");
+		temperaturesvls.add("cold");
+		DiscreteAttribute TemperaturesValues = new DiscreteAttribute("TemperaturesValues", 1, temperaturesvls);
+
+
+		TreeSet<String> humidityvls = new TreeSet<String>();
+		humidityvls.add("high");
+		humidityvls.add("normal");
+		DiscreteAttribute HumidityValues = new DiscreteAttribute("HumidityValues", 2, humidityvls);
+
+
+		TreeSet<String> windvls = new TreeSet<String>();
+		windvls.add("weak");
+		windvls.add("strong");
+		DiscreteAttribute WindValues = new DiscreteAttribute("OutlookkValues", 3, windvls);
+
+
+		TreeSet<String> playtennisvls = new TreeSet<String>();
+		playtennisvls.add("yes");
+		playtennisvls.add("no");
+		DiscreteAttribute PlayTennisValues = new DiscreteAttribute("PlayTennisValues", 4, playtennisvls);
+
+		attributeSet.add(0, OutlookValues);
+		attributeSet.add(1, TemperaturesValues);
+		attributeSet.add(2, HumidityValues);
+		attributeSet.add(3, WindValues);
+		attributeSet.add(4, PlayTennisValues);
+
 	}
 	
 	public int getNumberOfExamples() {
@@ -132,46 +174,49 @@ public class Data {
 	}
 
 	public int getNumberOfAttributes() {
-		return attributeSet.length;
+		return attributeSet.size();
 	}
 	
 	public Object getAttributeValue(int exampleIndex, int attributeIndex) {
-		return data[exampleIndex][attributeIndex];
+		return data.get(attributeIndex).get(attributeIndex);
 	}
 	
 	public Attribute getAttribute(int index) {
-		return attributeSet[index];
+		return attributeSet.get(index);
 	}
 	
 	
 	public String toString() {
 		String table = new String();
-		for (int i = 0; i<attributeSet.length; i++){
-			table = table + attributeSet[i].toString() + ", ";
+		for (int i = 0; i<attributeSet.size(); i++){
+			table = table + attributeSet.get(i).toString() + ", ";
 		}
 		table = table + "\n";
 		for (int i = 0; i<numberOfExamples; i++){
 			table = table + (i+1) + ": ";
-			for (int j = 0; j<attributeSet.length; j++){
-				table = table + data[i][j].toString() + ",\t";
+			for (int j = 0; j<attributeSet.size(); j++){
+				table = table + data.get(i).get(j).toString() + ",\t";
 			}
 			table = table + "\n";
 		}
 		return table;
 	}
 
-	public Tuple getItemSet(int index) {
+	/*public Tuple getItemSet(int index) {
 
-		Tuple tuple = new Tuple(attributeSet.length);
-		for (int i = 0; i<attributeSet.length; i++) {
-			tuple.add(new DiscreteItem((DiscreteAttribute)attributeSet[i], (String)data[index][i]), i);
+		Tuple tuple = new Tuple(attributeSet.size());
+		for (int i = 0; i<attributeSet.size(); i++) {
+			tuple.add(new DiscreteItem((DiscreteAttribute)attributeSet.get(index), (String)data.get(index).get(i)), i);
 		}
 		return tuple;
+	} */
+	public Example getItemSet (int index) {
+		return data.get(index);
 	}
 
 	public int [] sampling(int k) throws OutOfRangeSampleSize{
-		if (k<0 || k>distinctTuples) {
-			throw new OutOfRangeSampleSize("Il numero di elementi del campione deve essere compreso tra 0 e " + distinctTuples + "");
+		if (k<0) {
+			throw new OutOfRangeSampleSize("Il numero di elementi del campione deve essere maggiore di 0");
 		}
 		int centroidIndexes[] = new int[k];
 		Random rand = new Random();
@@ -197,8 +242,8 @@ public class Data {
 	private boolean compare(int i, int k) {
 
 		boolean res = true;
-		for (int j = 0; j<attributeSet.length; j++) {
-			if (data[i][j] != data[k][j]) {
+		for (int j = 0; j<attributeSet.size(); j++) {
+			if (data.get(i).get(j)!= data.get(k).get(j)) {
 				res = false;
 			}
 		}
@@ -234,13 +279,48 @@ public class Data {
 		return attribute.getValue(maxIndex);
 	}
 
-	class Example implements Comparable<Example>{
+	class Example implements Comparable<Example> {
+
 		private List<Object> example = new ArrayList<Object>();
 
-		public void add(Object o){}
-		public Object get(int i){return null;}
-		public int compareTo(Example ex){return 0;}
-		public String toString(){return null;}
+		public void add(Object o) {
+
+			example.add(o);
+		}
+
+		public Object get(int i) {
+			return example.get(i);
+		}
+
+		public int compareTo(Example ex) {
+
+			int x = 0;
+			for (int i = 0; i<example.size(); i++) {
+					if (example.get(i).equals(ex.get(i))) {
+						x = 0;
+					} else if(example.get(i) instanceof String) {
+						String o = (String) example.get(i);
+						String p = (String) ex.get(i);
+						x = o.compareTo(p);
+					} else if(example.get(i) instanceof Double) {
+						Double o = (Double) example.get(i);
+						Double p = (Double) example.get(i);
+						x = o.compareTo(p);
+					}
+			}
+			return x;
+		} 
+
+		public String toString() {
+
+			String str = new String();
+
+			for (Object o: example) {
+				str = " | " + o;
+			}
+
+			return str;
+		}
 
 	}
 

@@ -3,20 +3,22 @@ import java.util.Iterator;
 import java.util.TreeSet;
 import utility.ArraySet;
 
-class DiscreteAttribute extends Attribute implements Iterable<String>{
+class DiscreteAttribute extends Attribute implements Iterable<String> {
 
     //private String[] values;
     private TreeSet<String> values;
     private Iterator<String> iterator = values.iterator();
 
-    DiscreteAttribute(String name, int index, TreeSet<String> values) {
+    DiscreteAttribute(String name, int index, TreeSet<String> v) {
+
         super(name, index);
         //this.values = new String[values.length];
         this.values = new TreeSet<String>();
-        for (int i = 0; i < getNumberOfDistinctValues(); i++) {
-            //this.values[i] = values[i];
-            this.values.add(value);
+        Iterator<String> it = v.iterator();
+        while (it.hasNext()) {
+            this.values.add(it.next());
         }
+        
     }
 
     public int getNumberOfDistinctValues() {
