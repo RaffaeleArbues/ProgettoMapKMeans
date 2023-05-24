@@ -5,7 +5,7 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.ArrayList;
 import java.util.LinkedList;
-
+import static data.OutOfRangeSampleSize.*;
 import utility.ArraySet;
 
 public class Data {
@@ -215,9 +215,12 @@ public class Data {
 	}
 
 	public int [] sampling(int k) throws OutOfRangeSampleSize{
+		/*
 		if (k<0) {
 			throw new OutOfRangeSampleSize("Il numero di elementi del campione deve essere maggiore di 0");
 		}
+		*/
+		wrongRange(k, numberOfExamples);
 		int centroidIndexes[] = new int[k];
 		Random rand = new Random();
 		rand.setSeed(System.currentTimeMillis());

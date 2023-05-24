@@ -1,18 +1,18 @@
 import data.Data;
 import data.OutOfRangeSampleSize;
 import mining.KMeansMiner;
-import keyboardinput.*;
+import static keyboardinput.Keyboard.*;
 
 public class MainTest {
 	public static void main(String[] args) {
 	
 		Data data = new Data();
 		System.out.println(data);
-		Keyboard in = new Keyboard();
+		//Keyboard in = new Keyboard();
 		char c;
 		int numIter = 0;
 		do{
-			int k = in.readInt();
+			int k = readInt();
 			KMeansMiner kmeans = new KMeansMiner(k);
 			try{
 				numIter = kmeans.kmeans(data);
@@ -23,7 +23,7 @@ public class MainTest {
 			System.out.println(kmeans.getC().toString(data));
 
 			System.out.println("Vuoi continuare? (y/n)");
-			c = in.readChar();
+			c = readChar();
 		}while(c == 'y');
 	}
 }

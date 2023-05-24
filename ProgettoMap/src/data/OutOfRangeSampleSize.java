@@ -9,7 +9,7 @@ public class OutOfRangeSampleSize extends Exception{
         return "Sample size out of range";
     }
 
-    public void wrongRange(int k, int distinctValue) throws OutOfRangeSampleSize {
+    public static void wrongRange(int k, int distinctValue) throws OutOfRangeSampleSize {
         if (k <= 0 || k > distinctValue) {
             throw new OutOfRangeSampleSize("k is out of range");
         }
