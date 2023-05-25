@@ -6,8 +6,8 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.ArrayList;
 import java.util.LinkedList;
+import java.util.Set;
 import static data.OutOfRangeSampleSize.*;
-import utility.ArraySet;
 
 public class Data {
 
@@ -262,7 +262,7 @@ public class Data {
 
 	}
  
-	public Object computePrototype(ArraySet idList, Attribute attribute) {
+	public Object computePrototype(Set<Integer> idList, Attribute attribute) {
 		return  computePrototype(idList, (DiscreteAttribute)attribute);
 	}
 
@@ -270,7 +270,7 @@ public class Data {
 	 * restituisce il valore (String) che si ripete più volte utilizzando un vettore freq e la funzione frequency 
 	 * per il calcolo di quante volte un attributo si presenta
 	 */
-	public String computePrototype(ArraySet idList, DiscreteAttribute attribute) {
+	public String computePrototype(Set<Integer> idList, DiscreteAttribute attribute) {
 		
 		int freq[] = new int[attribute.getNumberOfDistinctValues()]; // freq di dimensione 5 nel nostro caso
 		Arrays.fill(freq, 0);

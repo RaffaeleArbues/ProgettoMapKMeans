@@ -1,19 +1,19 @@
 package mining;
 import data.Data;
 import data.Tuple;
-import utility.ArraySet;
+import java.util.HashSet;
+import java.util.Set;
+import java.util.Iterator;
 
 class Cluster {
 	
 	private Tuple centroid;
-	private ArraySet clusteredData; 
-	
-	/* Cluster(){ ... } */
+	private Set<Integer> clusteredData; 
 
 	Cluster(Tuple centroid) {
 
 		this.centroid = centroid;
-		clusteredData = new ArraySet();
+		clusteredData = new HashSet<Integer>();
 		
 	} 
 		
@@ -41,15 +41,21 @@ class Cluster {
 	/*
 	 * verifica se una tupla (id) é clusterizzata nell'array corrente
 	 */
-	public boolean contain(int id) {
-		return clusteredData.get(id);
+	public boolean contain(int id) { // ho cambiato il senso della funzione mettendo il valore (prima era l'indice dell'array) ho rischiato la morte >.<
+		Iterator<Integer> it = clusteredData.iterator();
+		boolean res = false;
+		while(it.hasNext()) {
+			if(it.next() == id)
+				res = true;
+		}
+		return res;
 	}
 	
 	/*
 	 * remove the tuple that has changed the cluster
 	 */
 	public void removeTuple(int id) {
-		clusteredData.delete(id);
+		clusteredData.remove(id);
 	}
 	
 	/* stampa solo la tupla del centroide del cluster */

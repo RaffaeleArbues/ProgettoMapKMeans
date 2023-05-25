@@ -1,7 +1,7 @@
 package data;
 import java.util.Iterator;
 import java.util.TreeSet;
-import utility.ArraySet;
+import java.util.Set;
 
 class DiscreteAttribute extends Attribute implements Iterable<String> {
 
@@ -33,12 +33,13 @@ class DiscreteAttribute extends Attribute implements Iterable<String> {
      * restituisve quante volte si ripete uno specifico attributo
      */
 
-    public int frequency(Data data, ArraySet idList, String v) {
+    public int frequency(Data data, Set<Integer> idList, String v) {
 
         int count = 0;
-        for (int j = 0; j<idList.getSize(); j++) // scorro l'arrayset
+        Iterator<Integer> it = idList.iterator();
+        for (int j = 0; j<idList.size(); j++) // scorro l'arrayset
             {
-                if (idList.get(j)) { // nelle posizioni j-true 
+                if (it.next() != null) { // nelle posizioni j-true 
                     if (data.getAttributeValue(j, getIndex()).equals(v)) { // controllo data in riga j e colonna k se è uguale a v
                         count++;
                     }
