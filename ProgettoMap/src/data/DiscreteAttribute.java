@@ -7,7 +7,6 @@ class DiscreteAttribute extends Attribute implements Iterable<String> {
 
     //private String[] values;
     private TreeSet<String> values; /* TreeSet è una collezione di elementi ordinati e non duplicati, struttura ad albero */
-    private Iterator<String> iterator = values.iterator();/* iteratore permette di scorrere gli elementi, aggiungere e rimuovere */
 
     DiscreteAttribute(String name, int index, TreeSet<String> v) {
 
@@ -25,8 +24,9 @@ class DiscreteAttribute extends Attribute implements Iterable<String> {
         return values.size();
     }
 
-    public Iterator<String> iterator(){
-        return values.iterator();    
+    public Iterator<String> iterator() {
+        Iterator<String> iterator = values.iterator();
+        return iterator;    
     }
 
     /*

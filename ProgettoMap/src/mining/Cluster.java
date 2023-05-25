@@ -77,7 +77,14 @@ class Cluster {
 			str += centroid.get(i).getValue()+ " "; //aggiunto getValue();
 		str += ")\nExamples:\n";
 
-		int array[] = clusteredData.toArray();
+		int[] array= new int[clusteredData.size()];
+		Iterator<Integer> it = clusteredData.iterator();
+		while (it.hasNext()) {
+			for (int i = 0; i<array.length; i++) {
+				array[i] = it.next().intValue();
+			}
+		} 
+		
 		for(int i = 0; i<array.length; i++) {
 			str += "[";
 			for(int j = 0; j<data.getNumberOfAttributes(); j++)

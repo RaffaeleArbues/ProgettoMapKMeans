@@ -187,35 +187,35 @@ public class Data {
 	}
 	
 	public String toString() {
+
 		String table = new String();
 		for (int i = 0; i<attributeSet.size(); i++){
-			table = table + attributeSet.get(i).toString() + ", ";
+			table = table + attributeSet.get(i).getName() + ", ";
 		}
 		table = table + "\n";
+
 		for (int i = 0; i<numberOfExamples; i++){
 			table = table + (i+1) + ": ";
-			for (int j = 0; j<attributeSet.size(); j++){
+			for (int j = 0; j<attributeSet.size(); j++) {
 				table = table + data.get(i).get(j).toString() + ",\t";
 			}
 			table = table + "\n";
 		}
 		return table;
+
 	}
 
-	/*public Tuple getItemSet(int index) {
-
-		Tuple tuple = new Tuple(attributeSet.size());
-		for (int i = 0; i<attributeSet.size(); i++) {
-			tuple.add(new DiscreteItem((DiscreteAttribute)attributeSet.get(index), (String)data.get(index).get(i)), i);
-		}
-		return tuple;
-	} */
-
 	/*
-	 * restituisce una riga di data (Example)
+	 * restituisce una riga di data (Tuple)
 	 */
-	public Example getItemSet (int index) {
-		return data.get(index);
+	public Tuple getItemSet (int index) {
+
+		Tuple tupla = new Tuple(attributeSet.size());
+		for (int i = 0; i<attributeSet.size(); i++) {
+			tupla.add(new DiscreteItem((DiscreteAttribute)attributeSet.get(i), (String)data.get(index).get(i)), i);
+		}
+
+		return tupla;
 	}
 
 	public int [] sampling(int k) throws OutOfRangeSampleSize{
