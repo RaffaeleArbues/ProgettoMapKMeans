@@ -2,6 +2,7 @@ package data;
 import java.util.Random;
 import java.util.TreeSet;
 import java.util.Arrays;
+import java.util.Iterator;
 import java.util.List;
 import java.util.ArrayList;
 import java.util.LinkedList;
@@ -185,7 +186,6 @@ public class Data {
 		return attributeSet.get(index);
 	}
 	
-	
 	public String toString() {
 		String table = new String();
 		for (int i = 0; i<attributeSet.size(); i++){
@@ -210,6 +210,10 @@ public class Data {
 		}
 		return tuple;
 	} */
+
+	/*
+	 * restituisce una riga di data (Example)
+	 */
 	public Example getItemSet (int index) {
 		return data.get(index);
 	}
@@ -242,6 +246,9 @@ public class Data {
 		return centroidIndexes;
 	}
 
+	/*
+	 * confronta due righe e resturna true se uguali, false se diverse
+	 */
 	private boolean compare(int i, int k) {
 
 		boolean res = true;
@@ -260,15 +267,17 @@ public class Data {
 	}
 
 	/*
-	 * valore(attributo) che più frequentemente si ripete utilizzando un vettore freq e la funzione frequency
+	 * restituisce il valore (String) che si ripete più volte utilizzando un vettore freq e la funzione frequency 
+	 * per il calcolo di quante volte un attributo si presenta
 	 */
 	public String computePrototype(ArraySet idList, DiscreteAttribute attribute) {
 		
 		int freq[] = new int[attribute.getNumberOfDistinctValues()]; // freq di dimensione 5 nel nostro caso
 		Arrays.fill(freq, 0);
 
-		for (int i = 0; i<attribute.getNumberOfDistinctValues(); i++) {
-			freq[i] = attribute.frequency(this, idList, attribute.getValue(i));
+		Iterator<String> it = attribute.iterator(); // dichiaro l'iteratore 
+		for (int i = 0; i<attribute.getNumberOfDistinctValues(); i++) { 
+			freq[i] = attribute.frequency(this, idList, it.next()); // changed here con it.next() invece di attribute.getValue(i);
 		}
 
 		int max = freq[0];
@@ -279,15 +288,28 @@ public class Data {
 			}
 		}
 
-		return attribute.getValue(maxIndex);
+		// reverso gli elementi (cioè stringhe) di attribute.values in un array di stringhe per poi returnare una stringa in un index specifico
+		int n = attribute.values.size();
+		String att[] = new String[n];
+		int i = 0; 
+		for (String s: attribute.values) {
+			att[i] = s;
+		}
+
+		return att[maxIndex];
 	}
+
+
+
+	/*
+	 * inner class Example 
+	 */
 
 	class Example implements Comparable<Example> {
 
 		private List<Object> example = new ArrayList<Object>();
 
 		public void add(Object o) {
-
 			example.add(o);
 		}
 
@@ -295,12 +317,16 @@ public class Data {
 			return example.get(i);
 		}
 
+		/*
+		 * restituisce 0 se string1 = string2,
+		 * 1 se string1>strign2, -1 se string1<string2
+		 */
 		public int compareTo(Example ex) {
 
 			int x = 0;
 			for (int i = 0; i<example.size(); i++) {
 					if (example.get(i).equals(ex.get(i))) {
-						x = 0;
+						x = 0; // oggetti uguali
 					} else if(example.get(i) instanceof String) {
 						String o = (String) example.get(i);
 						String p = (String) ex.get(i);
@@ -311,13 +337,13 @@ public class Data {
 						x = o.compareTo(p);
 					}
 			}
+
 			return x;
 		} 
 
 		public String toString() {
 
 			String str = new String();
-
 			for (Object o: example) {
 				str = " | " + o;
 			}

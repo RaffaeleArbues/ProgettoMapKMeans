@@ -1,7 +1,5 @@
 package utility;
 import java.util.Arrays;
-
-
 public class ArraySet {
 
 	private boolean set[]; //true if the element is in the set

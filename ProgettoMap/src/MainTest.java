@@ -11,12 +11,12 @@ public class MainTest {
 		//Keyboard in = new Keyboard();
 		char c;
 		int numIter = 0;
-		do{
+		do {
 			int k = readInt();
 			KMeansMiner kmeans = new KMeansMiner(k);
-			try{
+			try {
 				numIter = kmeans.kmeans(data);
-			}catch(OutOfRangeSampleSize e){
+			} catch(OutOfRangeSampleSize e){
 				System.out.println(e);
 			}
 			System.out.println("Numero di Iterazioni eseguite: "+numIter);
@@ -24,6 +24,6 @@ public class MainTest {
 
 			System.out.println("Vuoi continuare? (y/n)");
 			c = readChar();
-		}while(c == 'y');
+		} while(c == 'y');
 	}
 }

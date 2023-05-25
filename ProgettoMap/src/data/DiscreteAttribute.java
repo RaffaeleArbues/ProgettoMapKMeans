@@ -6,8 +6,8 @@ import utility.ArraySet;
 class DiscreteAttribute extends Attribute implements Iterable<String> {
 
     //private String[] values;
-    private TreeSet<String> values;
-    private Iterator<String> iterator = values.iterator();
+    private TreeSet<String> values; /* TreeSet è una collezione di elementi ordinati e non duplicati, struttura ad albero */
+    private Iterator<String> iterator = values.iterator();/* iteratore permette di scorrere gli elementi, aggiungere e rimuovere */
 
     DiscreteAttribute(String name, int index, TreeSet<String> v) {
 
@@ -30,16 +30,16 @@ class DiscreteAttribute extends Attribute implements Iterable<String> {
     }
 
     /*
-     * restituisve quante volte si ripete un valore attributo (string v)
+     * restituisve quante volte si ripete uno specifico attributo
      */
 
     public int frequency(Data data, ArraySet idList, String v) {
 
         int count = 0;
-        for (int j = 0; j<idList.getSize(); j++) 
+        for (int j = 0; j<idList.getSize(); j++) // scorro l'arrayset
             {
-                if (idList.get(j)) {
-                    if (data.getAttributeValue(j, getIndex()).equals(v)) {
+                if (idList.get(j)) { // nelle posizioni j-true 
+                    if (data.getAttributeValue(j, getIndex()).equals(v)) { // controllo data in riga j e colonna k se è uguale a v
                         count++;
                     }
                 }
@@ -47,8 +47,5 @@ class DiscreteAttribute extends Attribute implements Iterable<String> {
 
         return count; 
     }
-
-
-
 
 }
