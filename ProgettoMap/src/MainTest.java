@@ -12,6 +12,7 @@ public class MainTest {
 		char c;
 		int numIter = 0;
 		do {
+			System.out.print("Inserisci il numero di cluster desiderati: ");
 			int k = readInt();
 			KMeansMiner kmeans = new KMeansMiner(k);
 			try {

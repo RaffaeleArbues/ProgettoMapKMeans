@@ -306,7 +306,11 @@ public class Data {
 
 	class Example implements Comparable<Example> {
 
-		private List<Object> example = new ArrayList<Object>();
+		private List<Object> example;
+
+		public Example() {
+			example = new ArrayList<Object>();
+		}
 
 		public void add(Object o) {
 			example.add(o);
@@ -318,7 +322,7 @@ public class Data {
 
 		/*
 		 * restituisce 0 se string1 = string2,
-		 * 1 se string1>strign2, -1 se string1<string2
+		 * 1 se string1>string2, -1 se string1<string2
 		 */
 		public int compareTo(Example ex) {
 
@@ -330,10 +334,12 @@ public class Data {
 						String o = (String) example.get(i);
 						String p = (String) ex.get(i);
 						x = o.compareTo(p);
+						return x;
 					} else if(example.get(i) instanceof Double) {
 						Double o = (Double) example.get(i);
 						Double p = (Double) example.get(i);
 						x = o.compareTo(p);
+						return x;
 					}
 			}
 
@@ -344,7 +350,7 @@ public class Data {
 
 			String str = new String();
 			for (Object o: example) {
-				str = " | " + o;
+				str += " | " + o;
 			}
 
 			return str;
