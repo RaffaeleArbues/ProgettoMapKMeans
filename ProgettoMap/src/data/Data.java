@@ -289,10 +289,9 @@ public class Data {
 		}
 
 		// reverso gli elementi (cioè stringhe) di attribute.values in un array di stringhe per poi returnare una stringa in un index specifico
-		int n = attribute.values.size();
-		String att[] = new String[n];
+		String att[] = new String[attribute.getNumberOfDistinctValues()];
 		int i = 0; 
-		for (String s: attribute.values) {
+		for (String s: attribute) {
 			att[i] = s;
 		}
 
