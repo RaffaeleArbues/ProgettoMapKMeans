@@ -179,7 +179,7 @@ public class Data {
 	}
 	
 	public Object getAttributeValue(int exampleIndex, int attributeIndex) {
-		return data.get(attributeIndex).get(attributeIndex);
+		return data.get(exampleIndex).get(attributeIndex);
 	}
 	
 	public Attribute getAttribute(int index) {
