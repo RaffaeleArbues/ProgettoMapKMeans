@@ -39,8 +39,8 @@ class DiscreteAttribute extends Attribute implements Iterable<String> {
         Iterator<Integer> it = idList.iterator();
         for (int j = 0; j<idList.size(); j++) // scorro l'arrayset
             {
-                if (it.next() != null) { // nelle posizioni j-true 
-                    if (data.getAttributeValue(j, getIndex()).equals(v)) { // controllo data in riga j e colonna k se è uguale a v
+                if (it.hasNext()) { // nelle posizioni j-true 
+                    if (data.getAttributeValue(it.next(), getIndex()).equals(v)) { // controllo data in riga j e colonna k se è uguale a v
                         count++;
                     }
                 }
