@@ -136,31 +136,31 @@ public class Data {
 		outlookvls.add("overcast");
 		outlookvls.add("rain");
 		outlookvls.add("sunny");
-		DiscreteAttribute OutlookValues = new DiscreteAttribute("OutlookkValues", 0, outlookvls);
+		DiscreteAttribute OutlookValues = new DiscreteAttribute("Outlook", 0, outlookvls);
 
 		TreeSet<String> temperaturesvls = new TreeSet<String>();
 		temperaturesvls.add("hot");
 		temperaturesvls.add("mild");
 		temperaturesvls.add("cold");
-		DiscreteAttribute TemperaturesValues = new DiscreteAttribute("TemperaturesValues", 1, temperaturesvls);
+		DiscreteAttribute TemperaturesValues = new DiscreteAttribute("Temperature", 1, temperaturesvls);
 
 
 		TreeSet<String> humidityvls = new TreeSet<String>();
 		humidityvls.add("high");
 		humidityvls.add("normal");
-		DiscreteAttribute HumidityValues = new DiscreteAttribute("HumidityValues", 2, humidityvls);
+		DiscreteAttribute HumidityValues = new DiscreteAttribute("Humidity", 2, humidityvls);
 
 
 		TreeSet<String> windvls = new TreeSet<String>();
 		windvls.add("weak");
 		windvls.add("strong");
-		DiscreteAttribute WindValues = new DiscreteAttribute("OutlookkValues", 3, windvls);
+		DiscreteAttribute WindValues = new DiscreteAttribute("Wind", 3, windvls);
 
 
 		TreeSet<String> playtennisvls = new TreeSet<String>();
 		playtennisvls.add("yes");
 		playtennisvls.add("no");
-		DiscreteAttribute PlayTennisValues = new DiscreteAttribute("PlayTennisValues", 4, playtennisvls);
+		DiscreteAttribute PlayTennisValues = new DiscreteAttribute("PlayTennis", 4, playtennisvls);
 
 		attributeSet.add(0, OutlookValues);
 		attributeSet.add(1, TemperaturesValues);
