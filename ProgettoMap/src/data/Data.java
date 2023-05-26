@@ -263,7 +263,7 @@ public class Data {
 	}
  
 	public Object computePrototype(Set<Integer> idList, Attribute attribute) {
-		return  computePrototype(idList, (DiscreteAttribute)attribute);
+		return computePrototype(idList, (DiscreteAttribute)attribute);
 	}
 
 	/*
@@ -276,8 +276,10 @@ public class Data {
 		Arrays.fill(freq, 0);
 
 		Iterator<String> it = attribute.iterator(); // dichiaro l'iteratore 
-		for (int i = 0; i<attribute.getNumberOfDistinctValues(); i++) { 
-			freq[i] = attribute.frequency(this, idList, it.next()); // changed here con it.next() invece di attribute.getValue(i);
+		for (int i = 0; i<attribute.getNumberOfDistinctValues(); i++) {
+			while(it.hasNext()){
+				freq[i] = attribute.frequency(this, idList, it.next()); // changed here con it.next() invece di attribute.getValue(i);
+			}
 		}
 
 		int max = freq[0];
