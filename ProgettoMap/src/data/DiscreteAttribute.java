@@ -30,22 +30,20 @@ class DiscreteAttribute extends Attribute implements Iterable<String> {
     }
 
     /*
-     * restituisve quante volte si ripete uno specifico attributo
+     * restituisce quante volte si ripete uno specifico attributo
      */
 
     public int frequency(Data data, Set<Integer> idList, String v) {
 
         int count = 0;
         Iterator<Integer> it = idList.iterator();
-        for (int j = 0; j<idList.size(); j++) // scorro l'arrayset
-            {
-                if (it.hasNext()) { // nelle posizioni j-true 
-                    if (data.getAttributeValue(it.next(), getIndex()).equals(v)) { // controllo data in riga j e colonna k se è uguale a v
+        for (int j = 0; j<idList.size(); j++) {
+                if (it.hasNext()) {
+                    if (data.getAttributeValue(it.next(), getIndex()).equals(v)) { 
                         count++;
                     }
                 }
             }
-
         return count; 
     }
 

@@ -7,22 +7,22 @@ public class ClusterSet{
 
     private Cluster[] C;
 
-    ClusterSet(int k){
+    ClusterSet(int k) {
         C = new Cluster[k];
     }
 
-    public void add(Cluster clust, int i){
+    public void add(Cluster clust, int i) {
         C[i] = clust; 
     }
 
-    public Cluster get(int i){
+    public Cluster get(int i) {
         return C[i];
     }
 
     // Inserisce gli indici dei centroidi dentro l'array centroidIndexes e crea i cluster in base a quello.
     public void inizializeCentroids(Data data) throws OutOfRangeSampleSize{
         int[] centroidIndexes = data.sampling(C.length);
-        for(int i = 0; i<centroidIndexes.length; i++){
+        for(int i = 0; i<centroidIndexes.length; i++) {
             Tuple centroidI = data.getItemSet(centroidIndexes[i]);
             add(new Cluster(centroidI), i);
         }
@@ -41,7 +41,7 @@ public class ClusterSet{
     /*
      * restituisce il cluster dove è presenta la tupla id
      */
-    public Cluster currentCluster(int id){
+    public Cluster currentCluster(int id) {
 
         for(int i = 0; i<C.length; i++){
             if(C[i].contain(id))
@@ -51,13 +51,13 @@ public class ClusterSet{
         return null;
     }
 
-    public void updateCentroids(Data data){
+    public void updateCentroids(Data data) {
         for(int i = 0; i<C.length; i++){
             C[i].computeCentroid(data);
         }
     }
 
-    public String toString(){
+    public String toString() {
 
         String str = "";
         for(int i = 0; i<C.length; i++){
@@ -69,7 +69,7 @@ public class ClusterSet{
 
     }
 
-    public String toString(Data data){
+    public String toString(Data data) {
 
         String str = "";
         for(int i = 0; i<C.length; i++){

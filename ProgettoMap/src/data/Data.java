@@ -141,7 +141,7 @@ public class Data {
 		TreeSet<String> temperaturesvls = new TreeSet<String>();
 		temperaturesvls.add("hot");
 		temperaturesvls.add("mild");
-		temperaturesvls.add("cold");
+		temperaturesvls.add("cool");
 		DiscreteAttribute TemperaturesValues = new DiscreteAttribute("Temperature", 1, temperaturesvls);
 
 
@@ -272,12 +272,12 @@ public class Data {
 	 */
 	public String computePrototype(Set<Integer> idList, DiscreteAttribute attribute) {
 		
-		int freq[] = new int[attribute.getNumberOfDistinctValues()]; // freq di dimensione 5 nel nostro caso
+		int freq[] = new int[attribute.getNumberOfDistinctValues()];
 		Arrays.fill(freq, 0);
 
-		Iterator<String> it = attribute.iterator(); // dichiaro l'iteratore 
+		Iterator<String> it = attribute.iterator();
+		while (it.hasNext()) { // funziona
 		for (int i = 0; i<attribute.getNumberOfDistinctValues(); i++) {
-			while(it.hasNext()){
 				freq[i] = attribute.frequency(this, idList, it.next()); // changed here con it.next() invece di attribute.getValue(i);
 			}
 		}
@@ -290,11 +290,12 @@ public class Data {
 			}
 		}
 
-		// reverso gli elementi (cioè stringhe) di attribute.values in un array di stringhe per poi returnare una stringa in un index specifico
-		String att[] = new String[attribute.getNumberOfDistinctValues()];
-		int i = 0; 
-		for (String s: attribute) {
-			att[i] = s;
+		int dim = attribute.getNumberOfDistinctValues();
+		String att[] = new String[dim];
+		
+		int i = 0;
+		for (String s : attribute) {
+			att[i++] = s;
 		}
 
 		return att[maxIndex];
