@@ -51,20 +51,20 @@ public class Data {
 		ex13.add(new String ("rain"));
 
 		// seconda colonna 
-		ex0.add(new String ("hot"));
-		ex1.add(new String ("hot"));
-		ex2.add(new String ("hot"));
-		ex3.add(new String ("mild"));
-		ex4.add(new String ("cool"));
-		ex5.add(new String ("cool"));
-		ex6.add(new String ("cool"));
-		ex7.add(new String ("mild"));
-		ex8.add(new String ("cool"));
-		ex9.add(new String ("mild"));
-		ex10.add(new String ("mild"));
-		ex11.add(new String ("mild"));
-		ex12.add(new String ("hot"));
-		ex13.add(new String ("mild"));
+		ex0.add(Double.valueOf("37.5"));
+		ex1.add(Double.valueOf("38.7"));
+		ex2.add(Double.valueOf("37.5"));
+		ex3.add(Double.valueOf("20.5"));
+		ex4.add(Double.valueOf("20.7"));
+		ex5.add(Double.valueOf("21.2"));
+		ex6.add(Double.valueOf("20.5"));
+		ex7.add(Double.valueOf("21.2"));
+		ex8.add(Double.valueOf("21.2"));
+		ex9.add(Double.valueOf("19.8"));
+		ex10.add(Double.valueOf("3.5"));
+		ex11.add(Double.valueOf("3.6"));
+		ex12.add(Double.valueOf("3.5"));
+		ex13.add(Double.valueOf("3.2"));
 
 		ex0.add(new String ("high"));
 		ex1.add(new String ("high"));
@@ -138,11 +138,20 @@ public class Data {
 		outlookvls.add("sunny");
 		DiscreteAttribute OutlookValues = new DiscreteAttribute("Outlook", 0, outlookvls);
 
-		TreeSet<String> temperaturesvls = new TreeSet<String>();
-		temperaturesvls.add("hot");
-		temperaturesvls.add("mild");
-		temperaturesvls.add("cool");
-		DiscreteAttribute TemperaturesValues = new DiscreteAttribute("Temperature", 1, temperaturesvls);
+		// i valori delle temperature sono continui, quindi non vanno messi in un TreeSet
+		/*TreeSet<String> temperaturesvls = new TreeSet<String>();
+		temperaturesvls.add("37.5");
+		temperaturesvls.add("38.7");
+		temperaturesvls.add("20.5");
+		temperaturesvls.add("20.7");
+		temperaturesvls.add("21.2");
+		temperaturesvls.add("19.8");
+		temperaturesvls.add("3.5");
+		temperaturesvls.add("3.6");
+		temperaturesvls.add("3.2");
+		*/
+		/* Nel costruttore del continuous attribute va messo il valore minimo e massimo */
+		ContinuousAttribute TemperaturesValues = new ContinuousAttribute("Temperature", 1, 3.2, 38.7);
 
 
 		TreeSet<String> humidityvls = new TreeSet<String>();
@@ -206,13 +215,18 @@ public class Data {
 	}
 
 	/*
-	 * restituisce una riga di data (Tuple)
+	 * restituisce una riga di data (Tuple) in base al tipo di attributo che contiene la lista attributeSet
 	 */
 	public Tuple getItemSet (int index) {
 
 		Tuple tupla = new Tuple(attributeSet.size());
 		for (int i = 0; i<attributeSet.size(); i++) {
-			tupla.add(new DiscreteItem((DiscreteAttribute)attributeSet.get(i), (String)data.get(index).get(i)), i);
+			if(attributeSet.get(i) instanceof DiscreteAttribute){
+				tupla.add(new DiscreteItem((DiscreteAttribute)attributeSet.get(i), (String)data.get(index).get(i)), i);
+			}
+			else {
+				tupla.add(new ContinuousItem((ContinuousAttribute)attributeSet.get(i), (Double)data.get(index).get(i)), i);
+			}
 		}
 
 		return tupla;
@@ -261,9 +275,17 @@ public class Data {
 		return res;
 
 	}
- 
+	
+	/*
+	 * cambia chiamata di funzione a seconda del tipo di attribute
+	 */
 	public Object computePrototype(Set<Integer> idList, Attribute attribute) {
-		return computePrototype(idList, (DiscreteAttribute)attribute);
+		if(attribute instanceof ContinuousAttribute) {
+			return computePrototype(idList, (ContinuousAttribute)attribute);
+		}
+		else {
+			return computePrototype(idList, (DiscreteAttribute)attribute);
+		}
 	}
 
 	/*
@@ -300,6 +322,10 @@ public class Data {
 
 		return att[maxIndex];
 	}
+
+
+	/* Non ho capito che cosa dovrebbe fare */
+	public Double computePrototype(Set<Integer> idList, ContinuousAttribute attribute){return null;}
 
 
 
