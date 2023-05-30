@@ -1,6 +1,7 @@
 package mining;
 import data.Data;
 import data.OutOfRangeSampleSize;
+import java.io.*;
 
 public class KMeansMiner {
 
@@ -9,11 +10,20 @@ public class KMeansMiner {
     public KMeansMiner(int k) {
         C = new ClusterSet(k);
     }
-    /*
-    public KmeansMiner(String fileName) throws FileNotFoundException, IOException, ClassNotFoundException {
-        return null;
+    
+    public KMeansMiner(String fileName) throws FileNotFoundException, IOException, ClassNotFoundException {
+        FileInputStream inFile = new FileInputStream(fileName);
+        ObjectInputStream inStream = new ObjectInputStream(inFile);
+        C = (ClusterSet)inStream.readObject();
+        inStream.close();
     }
-    */
+    
+    public void salva(String fileName) throws FileNotFoundException, IOException {
+        FileOutputStream outFile = new FileOutputStream(fileName);
+        ObjectOutputStream outStream = new ObjectOutputStream(outFile);
+        outStream.writeObject(C);
+        outStream.close();
+    }
 
     public ClusterSet getC() {
         return C;

@@ -1,9 +1,11 @@
 package mining;
+import java.io.Serializable;
+
 import data.Data;
 import data.Tuple;
 import data.OutOfRangeSampleSize;
 
-public class ClusterSet{
+public class ClusterSet implements Serializable{
 
     private Cluster[] C;
 
