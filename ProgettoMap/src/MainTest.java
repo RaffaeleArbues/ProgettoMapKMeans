@@ -14,7 +14,21 @@ public class MainTest {
 
 		char c;
 		int numIter = 0;
+		//char scelta;
 		do {
+			/*
+			System.out.print("Vuoi caricare il file dell'ultimo risultato o inizializzarlo? (c/i) ");
+			scelta = readChar();
+			try {
+					KMeansMiner kmeans = new KMeansMiner("data.txt");
+			} catch (FileNotFoundException fl) {
+					System.out.println(fl);
+			} catch (IOException io) {
+					System.out.println(io);
+			} catch (ClassNotFoundException io) {
+					System.out.println(io);
+			}
+			*/
 			System.out.print("Inserisci il numero di cluster desiderati: ");
 			int k = readInt();
 			KMeansMiner kmeans = new KMeansMiner(k);
