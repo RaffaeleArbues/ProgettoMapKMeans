@@ -9,6 +9,11 @@ public class KMeansMiner {
     public KMeansMiner(int k) {
         C = new ClusterSet(k);
     }
+    /*
+    public KmeansMiner(String fileName) throws FileNotFoundException, IOException, ClassNotFoundException {
+        return null;
+    }
+    */
 
     public ClusterSet getC() {
         return C;

@@ -138,18 +138,6 @@ public class Data {
 		outlookvls.add("sunny");
 		DiscreteAttribute OutlookValues = new DiscreteAttribute("Outlook", 0, outlookvls);
 
-		// i valori delle temperature sono continui, quindi non vanno messi in un TreeSet
-		/*TreeSet<String> temperaturesvls = new TreeSet<String>();
-		temperaturesvls.add("37.5");
-		temperaturesvls.add("38.7");
-		temperaturesvls.add("20.5");
-		temperaturesvls.add("20.7");
-		temperaturesvls.add("21.2");
-		temperaturesvls.add("19.8");
-		temperaturesvls.add("3.5");
-		temperaturesvls.add("3.6");
-		temperaturesvls.add("3.2");
-		*/
 		/* Nel costruttore del continuous attribute va messo il valore minimo e massimo */
 		ContinuousAttribute TemperaturesValues = new ContinuousAttribute("Temperature", 1, 3.2, 38.7);
 
@@ -324,8 +312,17 @@ public class Data {
 	}
 
 
-	/* Non ho capito che cosa dovrebbe fare */
-	public Double computePrototype(Set<Integer> idList, ContinuousAttribute attribute){return null;}
+	/**
+	 * Calcola il valore medio per un Continuous Attribute
+	 */
+	public Double computePrototype(Set<Integer> idList, ContinuousAttribute attribute) {
+		double tot = 0;
+		Iterator<Integer> it = idList.iterator();
+		while(it.hasNext()) {
+			tot += (double)getAttributeValue(it.next(), attribute.getIndex());
+		}
+		return tot / idList.size();
+	}
 
 
 
@@ -366,7 +363,7 @@ public class Data {
 						return x;
 					} else if(example.get(i) instanceof Double) {
 						Double o = (Double) example.get(i);
-						Double p = (Double) example.get(i);
+						Double p = (Double) ex.get(i);
 						x = o.compareTo(p);
 						return x;
 					}
