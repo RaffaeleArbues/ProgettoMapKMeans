@@ -3,6 +3,7 @@ import data.Data;
 import data.OutOfRangeSampleSize;
 import java.io.*;
 
+
 public class KMeansMiner {
 
     private ClusterSet C;

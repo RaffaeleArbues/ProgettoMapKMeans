@@ -9,6 +9,7 @@ import java.util.LinkedList;
 import java.util.Set;
 import static data.OutOfRangeSampleSize.*;
 
+
 public class Data {
 
 	private List<Example> data = new ArrayList<Example>();

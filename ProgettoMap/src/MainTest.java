@@ -2,9 +2,9 @@ import data.Data;
 import data.OutOfRangeSampleSize;
 import mining.KMeansMiner;
 import static keyboardinput.Keyboard.*;
-
 import java.io.FileNotFoundException;
 import java.io.IOException;
+
 
 public class MainTest {
 	public static void main(String[] args) {
@@ -15,10 +15,14 @@ public class MainTest {
 		char c;
 		int numIter = 0;
 		char scelta;
+
 		do {
+
 			System.out.print("Vuoi caricare il file dell'ultimo risultato o inizializzarlo? (c/i) ");
 			scelta = readChar();
+
 			switch(scelta) {
+
 				case 'c':
 					try {
 							KMeansMiner kmeans = new KMeansMiner("data.txt");
@@ -31,6 +35,7 @@ public class MainTest {
 							System.out.println(io);
 					}
 					break;
+				
 				case 'i':
 					System.out.print("Inserisci il numero di cluster desiderati: ");
 					int k = readInt();
@@ -42,7 +47,6 @@ public class MainTest {
 					}
 					System.out.println("Numero di Iterazioni eseguite: " + numIter);
 					System.out.println(kmeans.getC().toString(data));
-
 					try {
 						kmeans.salva("data.txt");
 					} catch(FileNotFoundException f) {
@@ -51,17 +55,25 @@ public class MainTest {
 						System.out.println(io);
 					}
 					break;
+				
 				default:
 					System.out.println("Carattere non valido");
 					break;
+				
 			}
+
 			do {
+
 				System.out.println("Vuoi continuare? (y/n)");
 				c = readChar();
 				if (c != 'y' && c != 'n') {
 					System.out.println("Carattere non valido");
 				}
+
 			} while(c != 'y' && c != 'n');
+
 		} while(c == 'y');
+
 	}
+	
 }

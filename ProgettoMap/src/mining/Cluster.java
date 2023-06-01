@@ -1,11 +1,11 @@
 package mining;
 import data.Data;
 import data.Tuple;
-
 import java.io.Serializable;
 import java.util.HashSet;
 import java.util.Set;
 import java.util.Iterator;
+
 
 class Cluster implements Serializable{
 	
