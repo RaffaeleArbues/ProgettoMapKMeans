@@ -13,24 +13,24 @@ public class DbAccess {
     private final String PASSWORD = "map";
     private Connection conn;
 
-    public void initConnection() throws DatabaseConnectionException{
+    public void initConnection( ) throws DatabaseConnectionException {
         try{
             Class.forName(DRIVER_CLASS_NAME);
-            String url = DBMS+"://"+SERVER+":"+PORT+"/"+DATABASE;
+            String url = DBMS + "://" + SERVER + ":" + PORT + "/" + DATABASE;
             conn = DriverManager.getConnection(url, USER_ID, PASSWORD);
             closeConnection();
-        } catch(ClassNotFoundException e){
+        } catch(ClassNotFoundException e) {
             throw new DatabaseConnectionException("Driver non trovato", e);
-        } catch(SQLException e){
+        } catch(SQLException e) {
             throw new DatabaseConnectionException("Database non trovato", e);
         }
     }
 
-    public Connection getConnection(){
+    public Connection getConnection( ) {
         return conn;
     }
-    public void closeConnection(){
-        try{
+    public void closeConnection( ) {
+        try {
             conn.close();
         } catch(SQLException e){
             e.printStackTrace();

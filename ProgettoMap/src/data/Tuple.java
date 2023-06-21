@@ -1,8 +1,7 @@
 package data;
 import java.io.Serializable;
 
-
-public class Tuple implements Serializable{
+public class Tuple implements Serializable {
     
     private Item[] tuple;
 
@@ -32,7 +31,7 @@ public class Tuple implements Serializable{
         return distance;
     }
 
-    public double avgDistance(Data data, int clusteredData[]){
+    public double avgDistance(Data data, int clusteredData[]) {
         double p = 0.0 , sumD = 0.0;
         for(int i=0;i<clusteredData.length;i++){
             double d = getDistance(data.getItemSet(clusteredData[i]));

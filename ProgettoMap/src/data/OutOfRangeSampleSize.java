@@ -1,12 +1,11 @@
 package data;
 
-
-public class OutOfRangeSampleSize extends Exception{
-    OutOfRangeSampleSize(String message){
+public class OutOfRangeSampleSize extends Exception {
+    OutOfRangeSampleSize(String message) {
         super(message);
     }
 
-    public String toString(){
+    public String toString() {
         return "Sample size out of range";
     }
 

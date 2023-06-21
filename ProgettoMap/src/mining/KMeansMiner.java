@@ -1,8 +1,12 @@
 package mining;
 import data.Data;
 import data.OutOfRangeSampleSize;
-import java.io.*;
-
+import java.io.FileInputStream;
+import java.io.ObjectInputStream;
+import java.io.FileOutputStream;
+import java.io.ObjectOutputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
 
 public class KMeansMiner {
 
@@ -55,7 +59,6 @@ public class KMeansMiner {
         // STEP 3
         C.updateCentroids(data);
         } while(changedCluster);
-
 
         return numberOfIterations;
     }

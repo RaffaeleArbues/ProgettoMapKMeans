@@ -3,7 +3,6 @@ import java.util.Iterator;
 import java.util.TreeSet;
 import java.util.Set;
 
-
 class DiscreteAttribute extends Attribute implements Iterable<String> {
 
     //private String[] values;

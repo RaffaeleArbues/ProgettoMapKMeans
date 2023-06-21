@@ -1,6 +1,5 @@
 package data;
 
-
 class ContinuousAttribute extends Attribute {
     
     private double max;

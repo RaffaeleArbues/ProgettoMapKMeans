@@ -1,14 +1,13 @@
 package database;
-
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
 public class EmptySetException extends Exception{
-    EmptySetException(String message){
+    EmptySetException(String message) {
         super(message);
     }
 
-    public String toString(){
+    public String toString( ) {
         return "Empty set";
     }
 

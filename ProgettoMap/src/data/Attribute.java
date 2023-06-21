@@ -1,8 +1,7 @@
 package data;
 import java.io.Serializable;
 
-
-abstract class Attribute implements Serializable{
+abstract class Attribute implements Serializable {
     
     private String name;
     private int index;
