@@ -1,29 +1,37 @@
-public class ClusterSet{
-    Cluster[] C;
-    int i = 0;
+package mining;
+import java.io.Serializable;
+import data.Data;
+import data.Tuple;
+import data.OutOfRangeSampleSize;
 
-    ClusterSet(int k){
+
+public class ClusterSet implements Serializable{
+
+    private Cluster[] C;
+
+    ClusterSet(int k) {
         C = new Cluster[k];
     }
 
-    void add(Cluster clust){
+    public void add(Cluster clust, int i) {
         C[i] = clust; 
     }
 
-    Cluster get(int i){
+    public Cluster get(int i) {
         return C[i];
     }
 
     // Inserisce gli indici dei centroidi dentro l'array centroidIndexes e crea i cluster in base a quello.
-    void inizializeCentroids(Data data){
+    public void inizializeCentroids(Data data) throws OutOfRangeSampleSize{
         int[] centroidIndexes = data.sampling(C.length);
-        for(int i = 0; i<centroidIndexes.length; i++){
+        for(int i = 0; i<centroidIndexes.length; i++) {
             Tuple centroidI = data.getItemSet(centroidIndexes[i]);
-            add(new Cluster(centroidI));
+            add(new Cluster(centroidI), i);
         }
     }
 
-    Cluster nearestCluster(Tuple tuple){
+    public Cluster nearestCluster(Tuple tuple) {
+
         Cluster nearest = C[0];
         for(int i = 1; i<C.length; i++){
             if(tuple.getDistance(nearest.getCentroid()) > tuple.getDistance(C[i].getCentroid()))
@@ -32,21 +40,27 @@ public class ClusterSet{
         return nearest;
     }
 
-    Cluster currentCluster(int id){
+    /*
+     * restituisce il cluster dove è presenta la tupla id
+     */
+    public Cluster currentCluster(int id) {
+
         for(int i = 0; i<C.length; i++){
             if(C[i].contain(id))
                 return C[i];
         }
+
         return null;
     }
 
-    void updateCentroids(Data data){
+    public void updateCentroids(Data data) {
         for(int i = 0; i<C.length; i++){
             C[i].computeCentroid(data);
         }
     }
 
-    public String toString(){
+    public String toString() {
+
         String str = "";
         for(int i = 0; i<C.length; i++){
             if(C[i] != null){
@@ -54,15 +68,19 @@ public class ClusterSet{
             }
         }
         return str;
+
     }
 
-    public String toString(Data data){
+    public String toString(Data data) {
+
         String str = "";
         for(int i = 0; i<C.length; i++){
-            if(C[i] != null){
-                str += "Cluster "+i+": "+C[i].toString(data)+"\n";
+            if(C[i] != null) {
+                str += "\nCluster "+i+": "+C[i].toString(data)+"\n";
             }
         }
+
         return str;
     }
+
 }

@@ -1,19 +1,23 @@
+package data;
+import java.io.Serializable;
+import java.util.Set;
 
-abstract class Item {
 
-    Attribute attribute;
-    Object value;
+public abstract class Item implements Serializable {
+
+    private Attribute attribute;
+    private Object value;
 
     Item(Attribute attribute, Object value) {
         this.attribute = attribute;
         this.value = value;
     }
 
-    Attribute getAttribute() {
+    public Attribute getAttribute() {
         return attribute;
     }
 
-    Object getValue() {
+    public Object getValue() {
         return value;
     }
 
@@ -26,7 +30,7 @@ abstract class Item {
     /*
      * Modifica value di Item con il valore più ripetuto per un determinato attributo
      */
-    void update (Data data, ArraySet clusteredData) {
+    public void update (Data data, Set<Integer> clusteredData) {
         this.value = data.computePrototype(clusteredData, attribute);
     }
 }
