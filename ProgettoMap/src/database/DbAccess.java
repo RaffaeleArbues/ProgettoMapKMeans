@@ -14,15 +14,16 @@ public class DbAccess {
     private Connection conn;
 
     public void initConnection( ) throws DatabaseConnectionException {
-        try{
+        try {
             Class.forName(DRIVER_CLASS_NAME);
-            String url = DBMS + "://" + SERVER + ":" + PORT + "/" + DATABASE;
-            conn = DriverManager.getConnection(url, USER_ID, PASSWORD);
-            closeConnection();
         } catch(ClassNotFoundException e) {
             throw new DatabaseConnectionException("Driver non trovato", e);
-        } catch(SQLException e) {
-            throw new DatabaseConnectionException("Database non trovato", e);
+        } 
+        String url = DBMS + "://" + SERVER + ":" + PORT + "/" + DATABASE;
+        try {
+            conn = DriverManager.getConnection(url, USER_ID, PASSWORD);
+        } catch(SQLException s) {
+            throw new DatabaseConnectionException("Database non trovato", s);
         }
     }
 

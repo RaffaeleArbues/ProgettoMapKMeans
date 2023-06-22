@@ -1,4 +1,6 @@
 package database;
+import java.sql.Connection;
+import java.sql.DatabaseMetaData;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -8,6 +10,9 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Set;
 import java.util.TreeSet;
+
+import javax.naming.spi.DirStateFactory.Result;
+
 import database.TableSchema.Column;
 
 public class TableData {
@@ -16,35 +21,60 @@ public class TableData {
 	public TableData(DbAccess db) {
 		this.db = db;
 	}
+
+	/**
+	 * Ricava lo schema di "table", va a estrarre tutti i dati contenuti in table e va a inserire in una lista di example solo le tuple distinte.
+	 */
 	public List<Example> getDistinctTransazioni(String table) throws SQLException, EmptySetException {
-		// to do
-		/* 
-		 * copiare algoritmo del costruttore di Data per memorizzare tuple distinte:
-		 * estrarre tuple della tabella e metterle in un TreeSet
-		 * dopo, creare una List<Example> di tipo ArrayList a partire dal TreeSet
-		 * List<Example> = new ArrayList<Example>(TreeSet)
-		*/
+		TableSchema schema = new TableSchema(db, table); 
+		Connection con = db.getConnection();
+		Statement stmt = con.createStatement();
+
+		ResultSet resultSet = stmt.executeQuery("SELECT * FROM " + table);
+		Set<Example> distinctTuples = new TreeSet<Example>();
+
+		while (resultSet.next()) {
+			Example e = new Example();
+			for (int i = 0; i<schema.getNumberOfAttributes(); i++) {
+				if (schema.getColumn(i).isNumber()) {
+					e.add(resultSet.getFloat(schema.getColumn(i).getColumnName()));
+				} else {
+					e.add(resultSet.getString(schema.getColumn(i).getColumnName()));
+				}
+			}
+			distinctTuples.add(e);
+		}
+		resultSet.close();
+		List<Example> distinctTransazioni = new ArrayList<Example>(distinctTuples);
 		// eccezione EmptySetException da lanciare se ResultSet è vuoto
-		return null;
+		return distinctTransazioni;
 	}
 
+	/**
+	 * Restituisce un Set di valori distinti di una specifica colonna.
+	 */
 	public Set<Object> getDistinctColumnValues(String table, Column column) throws SQLException {
-		// to do
-		/* 
-		 * a partire dalla table che gli passiamo cicliamo sulla column che gli passiamo
-		 * e aggiungiamo i valori distinti di quella colonna ad un Set
-		 * che poi restituiremo
-		 * nel PDF c'è scritto di scegliere quale Set utilizzare, secondo me un TreeSet,
-		 * che esegue automaticamente i controlli sui duplicati, è il più opportuno
-		 */
-		return null;
+		Connection con = db.getConnection();
+		Statement stmt = con.createStatement();
+		ResultSet resultSet = stmt.executeQuery("SELECT " + column.getColumnName() + 
+		" FROM " + table + " ORDER BY " + column.getColumnName() + " ASC");
+
+		Set<Object> distinctColumns = new TreeSet<Object>();
+		while (resultSet.next()) {
+			distinctColumns.add(resultSet.getObject(column.getColumnName()));
+		}
+		resultSet.close();
+		return distinctColumns;
 	}
 
+	/**
+	 * Restituisce il risultato della query_type applicato alla colonna column della tabella table.
+	 */
 	public Object getAggregateColumnValue(String table, Column column, QUERY_TYPE aggregate) throws SQLException, NoValueException {
-		// to do
-		/*
-		 * onest non ho capit
-		 */
-		return null;
+		Connection con = db.getConnection();
+		Statement stmt = con.createStatement();
+		ResultSet resultSet = stmt.executeQuery("SELECT " + aggregate + "(" 
+		+ column.getColumnName() + ") FROM " + table);
+		return resultSet;
 	}
 }
