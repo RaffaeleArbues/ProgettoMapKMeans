@@ -91,15 +91,15 @@ public class TableData {
 	/**
 	 * Restituisce un Set di valori distinti di una specifica colonna.
 	 */
-	public Set<Object> getDistinctColumnValues(String table, Column column) throws SQLException {
+	public TreeSet<String> getDistinctColumnValues(String table, Column column) throws SQLException {
 		//Connection con = db.getConnection();
 		Statement stmt = db.getConnection().createStatement();
 		ResultSet resultSet = stmt.executeQuery("SELECT DISTINCT " + column.getColumnName() + 
 		" FROM " + table + " ORDER BY " + column.getColumnName() + " ASC");
 
-		Set<Object> distinctColumns = new TreeSet<Object>();
+		TreeSet<String> distinctColumns = new TreeSet<String>();
 		while (resultSet.next()) {
-			distinctColumns.add(resultSet.getObject(column.getColumnName()));
+			distinctColumns.add(resultSet.getString(column.getColumnName()));
 		}
 		resultSet.close();
 		stmt.close();

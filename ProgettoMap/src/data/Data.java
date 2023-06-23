@@ -1,9 +1,18 @@
 package data;
+import database.DatabaseConnectionException;
+import database.DbAccess;
+import database.EmptySetException;
+import database.Example;
+import database.NoValueException;
+import database.TableData;
+import database.TableSchema;
+import database.QUERY_TYPE;
 import java.util.Random;
 import java.util.TreeSet;
 import java.util.Arrays;
 import java.util.Iterator;
 import java.util.List;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.Set;
@@ -15,7 +24,33 @@ public class Data {
 	private List<Example> data = new ArrayList<Example>();
 	private int numberOfExamples;
 	private List<Attribute> attributeSet = new LinkedList<Attribute>();
+	private DbAccess db = new DbAccess();
 
+	public Data(String table) throws SQLException, EmptySetException, NoValueException, DatabaseConnectionException{
+		db.initConnection();
+		TableData td = new TableData(this.db);
+		TableSchema tblschm = new TableSchema(this.db, table);
+		// qui viene caricata la tabella tutta
+		this.data = td.getDistinctTransazioni(table);
+		Attribute attr;
+		for(int i = 0; i < tblschm.getNumberOfAttributes(); i++) {
+			if(tblschm.getColumn(i).isNumber()){
+				attr = new ContinuousAttribute(tblschm.getColumn(i).getColumnName(), 
+				i, (double)td.getAggregateColumnValue(table, tblschm.getColumn(i), QUERY_TYPE.MIN), 
+				(double)td.getAggregateColumnValue(table, tblschm.getColumn(i), QUERY_TYPE.MAX));
+			}
+			else{
+				attr = new DiscreteAttribute(tblschm.getColumn(i).getColumnName(), i,
+				td.getDistinctColumnValues(table, tblschm.getColumn(i)));
+			}
+			this.attributeSet.add(i, attr);
+		}
+		this.numberOfExamples = data.size();
+		db.closeConnection();
+	}
+
+
+/*
 	public Data() {
 		// TreeSet di suppporto
 		TreeSet<Example> tempData = new TreeSet<Example>();
@@ -139,7 +174,6 @@ public class Data {
 		outlookvls.add("sunny");
 		DiscreteAttribute OutlookValues = new DiscreteAttribute("Outlook", 0, outlookvls);
 
-		/* Nel costruttore del continuous attribute va messo il valore minimo e massimo */
 		ContinuousAttribute TemperaturesValues = new ContinuousAttribute("Temperature", 1, 3.2, 38.7);
 
 
@@ -167,6 +201,7 @@ public class Data {
 		attributeSet.add(4, PlayTennisValues);
 
 	}
+	*/
 	
 	public int getNumberOfExamples() {
 		return numberOfExamples;
@@ -329,7 +364,7 @@ public class Data {
 	/*
 	 * inner class Example 
 	 */
-
+/* 
 	class Example implements Comparable<Example> {
 
 		private List<Object> example;
@@ -346,10 +381,6 @@ public class Data {
 			return example.get(i);
 		}
 
-		/*
-		 * restituisce 0 se string1 = string2,
-		 * 1 se string1>string2, -1 se string1<string2
-		 */
 		public int compareTo(Example ex) {
 
 			int x = 0;
@@ -383,5 +414,6 @@ public class Data {
 		}
 
 	}
+*/
 
 }
