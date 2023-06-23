@@ -43,16 +43,18 @@ public class MainTest {
 					try {
 						numIter = kmeans.kmeans(data);
 					} catch(OutOfRangeSampleSize e) {
-						System.out.println(e);
+						System.out.println(e.getMessage()); //cambiato perché eliminato il toString
 					}
-					System.out.println("Numero di Iterazioni eseguite: " + numIter);
-					System.out.println(kmeans.getC().toString(data));
-					try {
-						kmeans.salva("data.txt");
-					} catch(FileNotFoundException f) {
-						System.out.println(f);
-					} catch(IOException io) {
-						System.out.println(io);
+					if (numIter != 0) { //aggiunto controllo su numIter, se chiamata l'eccezione non stampa il numero di iterazioni né salva il file
+						System.out.println("Numero di Iterazioni eseguite: " + numIter);
+						System.out.println(kmeans.getC().toString(data));
+						try {
+							kmeans.salva("data.txt");
+						} catch(FileNotFoundException f) {
+							System.out.println(f);
+						} catch(IOException io) {
+							System.out.println(io);
+						}
 					}
 					break;
 				

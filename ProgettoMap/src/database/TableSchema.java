@@ -66,14 +66,14 @@ public class TableSchema {
 		/**
 		 * Questa funzione è la nuova getNumberOfAttributes che abbiamo in Data.
 		 */
-		public int getNumberOfAttributes(){
+		public int getNumberOfAttributes() {
 			return tableSchema.size();
 		}
 		
 		/**
 		 * restituisce la colonna di tableShema.
 		 */
-		public Column getColumn(int index){
+		public Column getColumn(int index) {
 			return tableSchema.get(index);
 		}
 	}

@@ -27,14 +27,16 @@ public class DbAccess {
         }
     }
 
-    public Connection getConnection( ) {
+    public Connection getConnection() {
         return conn;
     }
-    public void closeConnection( ) {
+    public void closeConnection() {
         try {
             conn.close();
-        } catch(SQLException e){
-            e.printStackTrace();
+        } catch(SQLException e) {
+            System.out.println("SQLException: " + e.getMessage()); //fatto il print del messaggio stile DBAccess.txt
+			System.out.println("SQLState: " + e.getSQLState());
+			System.out.println("VendorError: " + e.getErrorCode());
         }
     }
 }

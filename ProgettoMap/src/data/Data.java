@@ -7,7 +7,7 @@ import java.util.List;
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.Set;
-import static data.OutOfRangeSampleSize.wrongRange;;
+//import static data.OutOfRangeSampleSize.wrongRange;;
 
 
 public class Data {
@@ -222,12 +222,11 @@ public class Data {
 	}
 
 	public int [] sampling(int k) throws OutOfRangeSampleSize{
-		/*
-		if (k<0) {
-			throw new OutOfRangeSampleSize("Il numero di elementi del campione deve essere maggiore di 0");
-		}
-		*/
-		wrongRange(k, numberOfExamples);
+		if (k <= 0 || k > numberOfExamples) {
+            throw new OutOfRangeSampleSize("Numero di cluster fuori dal range possibile");
+        }
+		// spostato la funzione qui, giusto che l'eccezione venga lanciata qua, commentato l'import
+		//wrongRange(k, numberOfExamples);
 		int centroidIndexes[] = new int[k];
 		Random rand = new Random();
 		rand.setSeed(System.currentTimeMillis());
