@@ -36,8 +36,8 @@ public class Data {
 		for(int i = 0; i < tblschm.getNumberOfAttributes(); i++) {
 			if(tblschm.getColumn(i).isNumber()){
 				attr = new ContinuousAttribute(tblschm.getColumn(i).getColumnName(), 
-				i, (double)td.getAggregateColumnValue(table, tblschm.getColumn(i), QUERY_TYPE.MIN), 
-				(double)td.getAggregateColumnValue(table, tblschm.getColumn(i), QUERY_TYPE.MAX));
+				i, (double)((float)td.getAggregateColumnValue(table, tblschm.getColumn(i), QUERY_TYPE.MIN)), 
+				(double)((float)td.getAggregateColumnValue(table, tblschm.getColumn(i), QUERY_TYPE.MAX)));
 			}
 			else{
 				attr = new DiscreteAttribute(tblschm.getColumn(i).getColumnName(), i,
@@ -249,7 +249,7 @@ public class Data {
 				tupla.add(new DiscreteItem((DiscreteAttribute)attributeSet.get(i), (String)data.get(index).get(i)), i);
 			}
 			else {
-				tupla.add(new ContinuousItem((ContinuousAttribute)attributeSet.get(i), (Double)data.get(index).get(i)), i);
+				tupla.add(new ContinuousItem((ContinuousAttribute)attributeSet.get(i), (double)((float)data.get(index).get(i))), i);
 			}
 		}
 
@@ -354,7 +354,7 @@ public class Data {
 		double tot = 0;
 		Iterator<Integer> it = idList.iterator();
 		while(it.hasNext()) {
-			tot += (double)getAttributeValue(it.next(), attribute.getIndex());
+			tot += (double)((float)getAttributeValue(it.next(), attribute.getIndex()));
 		}
 		return tot / idList.size();
 	}

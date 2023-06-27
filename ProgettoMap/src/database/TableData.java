@@ -112,15 +112,15 @@ public class TableData {
 	public Object getAggregateColumnValue(String table, Column column, QUERY_TYPE aggregate) throws SQLException, NoValueException {
 		//Connection con = db.getConnection();
 		Statement stmt = db.getConnection().createStatement();
-		ResultSet resultSet = stmt.executeQuery("SELECT " + aggregate + "(" 
-		+ column.getColumnName() + ") FROM " + table);
-
+		String string = "SELECT " + aggregate + "(" + column.getColumnName() + ") FROM " + table;
+		ResultSet resultSet = stmt.executeQuery(string);
+		//System.out.println(resultSet.getFloat(column.getColumnName()));
 		if (!resultSet.next()) { //lancia NoValueException in caso resultSet sia vuoto o null
             throw new NoValueException("Valore non valido"); // messaggio più specifico?
-        } else if (resultSet.getObject(column.getColumnName()) == null) {
+        } else if (resultSet.getObject(aggregate + "(" + column.getColumnName() + ")") == null) {
 			throw new NoValueException("Valore non valido");
 		}
-		Object aggregateColumnValue = resultSet.getObject(column.getColumnName());
+		Object aggregateColumnValue = resultSet.getObject(aggregate + "(" + column.getColumnName() + ")");
 		resultSet.close();
 		stmt.close();
 		return aggregateColumnValue; //cambiato il return perchè se restituiamo il ResultSet termina il metodo ma non viene chiuso il ResultSet, sprecando memoria
