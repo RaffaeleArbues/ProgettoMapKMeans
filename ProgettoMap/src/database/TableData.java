@@ -37,8 +37,8 @@ public class TableData {
 		if (!resultSet.next()) { //lancia EmptySetException in caso resultSet sia vuoto
             throw new EmptySetException("Empty set"); // messaggio più specifico?
         }
-		resultSet.beforeFirst();
-		while (resultSet.next()) {
+		//resultSet.beforeFirst();
+		do {
 			Example e = new Example();
 			for (int i = 0; i < schema.getNumberOfAttributes(); i++) {
 				if (schema.getColumn(i).isNumber()) {
@@ -48,7 +48,7 @@ public class TableData {
 				}
 			}
 			distinctTransazioni.add(e);
-		}
+		} while (resultSet.next());
 		resultSet.close();
 		stmt.close(); //aggiunta chiusura statement, fatto anche nei metodi successivi
 
